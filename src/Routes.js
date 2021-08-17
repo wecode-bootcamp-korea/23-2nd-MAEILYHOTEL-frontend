@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Nav } from './component/Nav';
+import { Nav } from './component/Nav/Nav';
 import { Detail } from './pages/Detail/Detail';
 import { List } from './pages/List/List';
 import { Main } from './pages/Main/Main';
