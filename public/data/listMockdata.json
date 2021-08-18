@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "image": "images/hotel6.jpg",
+    "name": "신라스테이 마포",
+    "content": "마포 | 공덕역 도보 3분",
+    "price": "59000원",
+    "percent": "74%",
+    "preprice": "275,000원"
+  },
+  {
+    "id": 2,
+    "image": "images/hotel1.jpg",
+    "name": "오라카이 청계산 호텔",
+    "content": "서초구 | 청계산역 도보 3분",
+    "price": "49000원",
+    "percent": "74%",
+    "preprice": "275,000원"
+  },
+  {
+    "id": 3,
+    "image": "images/hotel2.jpg",
+    "name": "노보텔 앰버서더",
+    "content": "금천구 | 공덕역 도보 3분",
+    "price": "79000원",
+    "percent": "74%",
+    "preprice": "275,000원"
+  },
+  {
+    "id": 4,
+    "image": "images/hotel3.jpg",
+    "name": "신라스테이 서대문",
+    "content": "금천구 | 공덕역 도보 3분",
+    "price": "89000원",
+    "percent": "74%",
+    "preprice": "275,000원"
+  },
+  {
+    "id": 5,
+    "image": "images/hotel4.jpg",
+    "name": "서울가든호텔",
+    "content": "서초구 | 공덕역 도보 3분",
+    "price": "35000원",
+    "percent": "74%",
+    "preprice": "275,000원"
+  },
+  {
+    "id": 6,
+    "image": "images/hotel5.jpg",
+    "name": "호텔해담가산",
+    "content": "중구 | 공덕역 도보 3분",
+    "price": "19000원",
+    "percent": "74%",
+    "preprice": "275,000원"
+  }
+]
