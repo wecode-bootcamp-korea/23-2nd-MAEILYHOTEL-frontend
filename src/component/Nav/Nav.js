@@ -19,12 +19,12 @@ export const Nav = () => {
 const NavIconWrap = styled.div`
   ${flexSet('initial', 'center', 'row')}
   margin-right: 20px;
-  font-size: 33px;
+  font-size: 25px;
 `;
 
 const NavLogo = styled.img`
   width: 200px;
-  height: 50px;
+  height: 33px;
 `;
 
 const NavWrap = styled.div`
