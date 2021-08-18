@@ -4,7 +4,7 @@ import { DownloadCoupon } from './DownloadCoupon';
 import styled from 'styled-components';
 import { fontSet } from '../../../styles/Mixins';
 
-export const DetailHotelTitle = ({ category, name, cost }) => {
+export const DetailHotelTitle = ({ category, name }) => {
   return (
     <TitleWrap>
       <Grade>{category}</Grade>
