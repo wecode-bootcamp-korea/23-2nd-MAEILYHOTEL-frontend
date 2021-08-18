@@ -4,6 +4,7 @@ import { Nav } from './component/Nav/Nav';
 import { Detail } from './pages/Detail/Detail';
 import { List } from './pages/List/List';
 import { Main } from './pages/Main/Main';
+import { Redirect } from './pages/Redirect/Redirect';
 
 class Routes extends React.Component {
   render() {
@@ -14,6 +15,7 @@ class Routes extends React.Component {
           <Route exact path="/" component={Main} />
           <Route exact path="/list" component={List} />
           <Route exact path="/detail" component={Detail} />
+          <Route exact path="/users/kakao" component={Redirect} />
         </Switch>
       </Router>
     );
