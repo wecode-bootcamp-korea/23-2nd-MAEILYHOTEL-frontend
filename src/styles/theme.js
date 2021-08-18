@@ -5,7 +5,7 @@ const colors = {
   gray_2: '#767676',
   gray_3: '#929292',
   green_1: '#3cb46e',
-  blue: '#74B9FF',
+  blue: '#74b9ff',
 };
 
 export const theme = {
