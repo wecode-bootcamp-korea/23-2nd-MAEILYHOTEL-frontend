@@ -23,7 +23,7 @@ export const fontSet = (
   line-height: ${lineHeight};
 `;
 
-export const divSize = (
+export const boxSizeSet = (
   width,
   height,
   margin = 'inherit',
@@ -35,7 +35,7 @@ export const divSize = (
   padding: ${padding};
 `;
 
-export const border = (border, borderRadius = 'inherit') => css`
+export const border = (border, borderRadius) => css`
   border: ${border};
   border-radius: ${borderRadius};
 `;
