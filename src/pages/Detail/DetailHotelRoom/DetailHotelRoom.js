@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFetch } from '../../../hooks';
 import { RoomType } from './RoomType';
+// import { DETAIL_PAGE } from '../../../config';                         // 실제 사용 코드
 
 import styled from 'styled-components';
 import { fontSet, boxSizeSet, border, flexSet } from '../../../styles/Mixins';
@@ -18,6 +19,18 @@ export const DetailHotelRoom = () => {
   // }, []);
 
   const [roomListData, loading] = useFetch('/data/ROOM_DATA.json');
+  // const [roomListData, loading] = useFetch(
+  //   `${DETAIL_PAGE}/3/rooms?CheckIn=2021-08-01&CheckOut=2021-08-03`  // 실제 사용 코드
+  // );
+  const [isFilterHandle, setIsFilterHandle] = useState(true);
+
+  const avgButton = () => {
+    setIsFilterHandle(false);
+  };
+
+  const totalButton = () => {
+    setIsFilterHandle(true);
+  };
 
   return (
     !loading && (
@@ -25,11 +38,17 @@ export const DetailHotelRoom = () => {
         <RoomChoiceTitle>객실선택</RoomChoiceTitle>
         <ChoiceDate>날짜</ChoiceDate>
         <CostFilter>
-          <AvgCostFilter>1박 평균 가격</AvgCostFilter>
-          <TotalCostFilter>총 가격</TotalCostFilter>
+          <TotalCostFilter onClick={avgButton} isFilterHandle={isFilterHandle}>
+            총 가격
+          </TotalCostFilter>
+          <AvgCostFilter onClick={totalButton} isFilterHandle={isFilterHandle}>
+            1박 평균 가격
+          </AvgCostFilter>
         </CostFilter>
         {roomListData?.data?.map((list, idx) => {
-          return <RoomType key={idx} list={list} />;
+          return (
+            <RoomType key={idx} list={list} isFilterHandle={isFilterHandle} />
+          );
         })}
         <RoomReservation color="#74B9ff">
           날짜 선택하고 객실 더보기
@@ -59,15 +78,30 @@ const ChoiceDate = styled.div`
 `;
 
 const CostFilter = styled.div`
-  width: 100%;
-  height: 50px;
-  background-color: #f8f8f9;
+  ${boxSizeSet('100%', '50px', 'none', 'none')};
   border-top: 1px solid #e7e7e7;
+  background-color: #f8f8f9;
 `;
 
-const AvgCostFilter = styled.li``;
+const TotalCostFilter = styled.li`
+  float: right;
+  position: relative;
+  margin-right: 24px;
+  padding-top: 23px;
+  font-size: 13px;
+  color: ${props => (props.isFilterHandle === false ? '#4d4d4d' : '#c5c5c5')};
+  cursor: pointer;
+`;
 
-const TotalCostFilter = styled.li``;
+const AvgCostFilter = styled.li`
+  float: right;
+  position: relative;
+  margin-right: 24px;
+  padding-top: 23px;
+  font-size: 13px;
+  color: ${props => (props.isFilterHandle === true ? '#4d4d4d' : '#c5c5c5')};
+  cursor: pointer;
+`;
 
 const RoomReservation = styled.button`
   ${({ color }) => fontSet('inherit', color, 'inherit', '0')};

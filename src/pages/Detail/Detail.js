@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useFetch } from '../../hooks';
-// import { API_IP } from '../../config';
+// import { DETAIL_PAGE } from '../../config';              // 실제 사용 코드
 import { DetailCommon } from '../../component/Detail/DetailCommon';
 import { DetailHotelTitle } from './DetailHotelTitle/DetailHotelTitle';
 import { DetailHotelRoom } from './DetailHotelRoom/DetailHotelRoom';
@@ -15,10 +15,10 @@ import { fullScreen } from '../../styles/Mixins';
 export const Detail = () => {
   const [isModalHandle, setIsModalHandle] = useState(false);
   const [hotelData, loading] = useFetch('/data/HOTEL_DATA.json');
+  // const [hotelData, loading] = useFetch(`${DETAIL_PAGE}/3`); // 실제 사용 코드
 
   const modalActive = () => {
     setIsModalHandle(!isModalHandle);
-    console.log(isModalHandle);
   };
 
   const {
@@ -30,7 +30,7 @@ export const Detail = () => {
     facilities,
     address,
     lat,
-    lng,
+    long,
     description,
     check_in,
     check_out,
@@ -55,7 +55,7 @@ export const Detail = () => {
           modalActive={modalActive}
           name={name}
           lat={lat}
-          lng={lng}
+          long={long}
         />
       </DetailSection>
     )

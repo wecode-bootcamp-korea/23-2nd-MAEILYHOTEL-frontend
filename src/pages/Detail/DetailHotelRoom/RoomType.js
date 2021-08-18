@@ -3,9 +3,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { boxSizeSet, flexSet, fontSet } from '../../../styles/Mixins';
 
-export const RoomType = ({ list }) => {
-  const price = Math.ceil(
+export const RoomType = ({ list, isFilterHandle }) => {
+  const totalPrice = Math.ceil(
     Number(`${list.option[0].price.total}`)
+  ).toLocaleString();
+
+  const avgPrice = Math.ceil(
+    Number(`${list.option[0].price.avg}`)
   ).toLocaleString();
 
   return (
@@ -20,7 +24,7 @@ export const RoomType = ({ list }) => {
         </div>
         <div>
           <GrayFont>{list.option[0].type}</GrayFont>
-          <Cost>{price}</Cost>
+          <Cost>{isFilterHandle ? avgPrice : totalPrice}</Cost>
           <GrayFont>원</GrayFont>
         </div>
       </RoomInfo>

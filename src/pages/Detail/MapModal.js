@@ -9,7 +9,7 @@ import {
 import styled from 'styled-components';
 import { boxSizeSet, flexSet, fontSet } from '../../styles/Mixins';
 
-export const MapModal = ({ isModalHandle, modalActive, name, lat, lng }) => {
+export const MapModal = ({ isModalHandle, modalActive, name, lat, long }) => {
   return (
     isModalHandle && (
       <MapModalSection>
@@ -26,17 +26,17 @@ export const MapModal = ({ isModalHandle, modalActive, name, lat, lng }) => {
               }}
               center={{
                 lat: Number(`${lat}`),
-                lng: Number(`${lng}`),
+                lng: Number(`${long}`),
               }}
               zoom={18}
             >
               <Marker
-                position={{ lat: Number(`${lat}`), lng: Number(`${lng}`) }}
+                position={{ lat: Number(`${lat}`), lng: Number(`${long}`) }}
               />
               <InfoWindow
                 position={{
                   lat: Number(`${lat}`) + 0.00015,
-                  lng: Number(`${lng}`),
+                  lng: Number(`${long}`),
                 }}
               >
                 <div>
