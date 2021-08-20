@@ -1,47 +1,37 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 
 import styled from 'styled-components';
-import {
-  boxSizeSet,
-  flexSet,
-  fontSet,
-  listHover,
-} from '../../../styles/Mixins';
+import { boxSizeSet, flexSet, fontSet } from '../../../styles/Mixins';
+import { Reservation } from './Reservation';
 
-export const RoomType = ({ list, isFilterHandle }) => {
-  const totalPrice = Math.ceil(
-    Number(`${list.option[0].price.total}`)
-  ).toLocaleString();
+export const RoomType = ({ list, isFilterHandle, parameters }) => {
+  const { id, option, image_url, name, people } = list || {};
+  const { price, type, check_in, check_out } = option[0] || {};
+  const { total, avg } = price || {};
 
-  const avgPrice = Math.ceil(
-    Number(`${list.option[0].price.avg}`)
-  ).toLocaleString();
+  const totalPrice = Math.ceil(Number(`${total}`)).toLocaleString();
+  const avgPrice = Math.ceil(Number(`${avg}`)).toLocaleString();
 
-  const history = useHistory();
+  const { query } = parameters;
+
+  const roomData = { id, query, type, check_in, check_out, total };
 
   return (
     <>
       <RoomTypeWrap>
-        <RoomImg src={list.image_url} alt="room" />
+        <RoomImg src={image_url} alt="room" />
         <RoomInfo>
           <div>
-            <RoomTitle>{list.name}</RoomTitle>
+            <RoomTitle>{name}</RoomTitle>
           </div>
           <div>
             <LimitPersonnel>
-              {list.people}인 기준 / 최대 {list.people}인
+              {people}인 기준 / 최대 {people}인
             </LimitPersonnel>
             <Cost>{`₩ ${isFilterHandle ? avgPrice : totalPrice}`}</Cost>
           </div>
         </RoomInfo>
-        <Reservation
-          onClick={() => {
-            history.push('/credit');
-          }}
-        >
-          예약하기
-        </Reservation>
+        <Reservation roomData={roomData} />
       </RoomTypeWrap>
     </>
   );
@@ -83,21 +73,4 @@ const LimitPersonnel = styled.span`
 const Cost = styled.span`
   ${fontSet('18px', 'inherit', '700', '1')};
   margin-right: 5px;
-`;
-
-const Reservation = styled.div`
-  position: absolute;
-  ${flexSet('center', 'center', 'row')}
-  ${boxSizeSet('150px', '200px')}
-  background-color: rgba(0, 0, 0, 0.6);
-  border: 3px solid #74b9ff;
-  color: ${({ theme }) => theme.colors.blue};
-  font-size: 30px;
-  font-weight: 500;
-  letter-spacing: 0.15rem;
-  opacity: 0;
-
-  &:hover {
-    animation: ${listHover} 0.3s forwards ease-in-out;
-  }
 `;

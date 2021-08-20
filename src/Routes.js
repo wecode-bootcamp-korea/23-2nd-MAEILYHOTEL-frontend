@@ -14,6 +14,7 @@ class Routes extends React.Component {
       <Router>
         <Nav />
         <Switch>
+          {/* <Redirect from="/users/kakao" to="/" /> */}
           <Route exact path="/" component={Main} />
           <Route exact path="/list" component={List} />
           <Route exact path="/detail/:id" component={Detail} />

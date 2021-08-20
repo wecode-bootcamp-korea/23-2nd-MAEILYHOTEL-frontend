@@ -24,6 +24,8 @@ export const DetailHotelRoom = ({ setCalendarOn }) => {
     setIsFilterHandle(true);
   };
 
+  const parameters = { pathName, query };
+
   return (
     !listLoading && (
       <RoomChoiceWrap>
@@ -39,7 +41,13 @@ export const DetailHotelRoom = ({ setCalendarOn }) => {
         </CostFilter>
         {roomListData?.data?.map((list, idx) => {
           return (
-            <RoomType key={idx} list={list} isFilterHandle={isFilterHandle} />
+            <RoomType
+              key={idx}
+              list={list}
+              isFilterHandle={isFilterHandle}
+              parameters={parameters}
+              roomListData={roomListData}
+            />
           );
         })}
         <RoomReservation color="#74B9ff" onClick={setCalendarOn}>

@@ -69,7 +69,6 @@ export const Detail = () => {
               setCalendarOn={() => {
                 setCalendarOn(true);
               }}
-              stayDate={stayDate}
             />
             <DetailHotelInfo name={name} description={description} />
             <DetailHotelFacility
