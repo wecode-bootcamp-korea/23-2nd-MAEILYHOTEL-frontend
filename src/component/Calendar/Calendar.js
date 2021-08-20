@@ -12,6 +12,7 @@ import { DETAIL_PAGE } from '../../config';
 import styled from 'styled-components';
 import 'react-datepicker/dist/react-datepicker.css';
 import { flexSet } from '../../styles/Mixins';
+import { conditionalExpression } from '@babel/types';
 
 export const Calendar = ({
   priceDisplay,
@@ -40,7 +41,7 @@ export const Calendar = ({
 
   const excludeDay = bookInfo => {
     const dates = Object.entries(bookInfo.result);
-    const quantityZero = dates.filter(dayInfo => dayInfo[1].quantity === 0);
+    const quantityZero = dates.filter(dayInfo => dayInfo[1].quantity <= 0);
     const excludeDays = quantityZero.map(day => {
       return new Date(day[0]);
     });

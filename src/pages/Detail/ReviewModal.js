@@ -4,7 +4,7 @@ import { ReviewWrite } from './DetailHotelReview/ReviewWrite';
 import { ReviewForm } from './DetailHotelReview/ReviewForm';
 import { useRouteMatch } from 'react-router-dom';
 import { idMasking } from '../Detail/DetailHotelReview/reviewIdMasking';
-import { DETAIL_PAGE } from '../../config';
+import { BOOK_API, DETAIL_PAGE } from '../../config';
 
 import styled from 'styled-components';
 import { fullScreen, boxSizeSet, flexSet, fontSet } from '../../styles/Mixins';
@@ -14,22 +14,53 @@ export const ReviewModal = ({
   reviewModalActive,
   setIsReviewModalHandle,
   reviews,
+  roomListData,
 }) => {
   const match = useRouteMatch();
   const [hotelReview, loading] = useFetch(
-    `http://10.58.2.242:8000/stays/${match.params.id}/reviews`
+    `${DETAIL_PAGE}/stays/${match.params.id}/reviews`
   );
+
+  const headers = {
+    Authorization: localStorage.getItem('login_token'),
+  };
+
   const [reservationUser] = useFetch(
     `${DETAIL_PAGE}/stays/${match.params.id}/reviewsavailable`,
     {
       method: 'get',
-      headers: {
-        Authorization: localStorage.getItem('login_token'),
-      },
+      headers,
     }
   );
 
-  const reserveCheck = reservationUser && reservationUser.is_available;
+  const [bookData, bookLoading] = useFetch(`${BOOK_API}`, { headers });
+
+  const bookRoomNumber =
+    bookData.data &&
+    Object.entries(bookData.data).map(book => {
+      return book[1].room_id;
+    });
+
+  const hotelRoomNumber =
+    roomListData.data &&
+    Object.entries(roomListData.data).map(room => {
+      return room[1].id;
+    });
+
+  const roomNumber = Array.from(new Set(bookRoomNumber));
+
+  const compareNum = roomNumber.filter(roomNum => {
+    for (let i = 0; i < hotelRoomNumber.length - 1; i++) {
+      if (hotelRoomNumber[i] === roomNum) {
+        return roomNum;
+      }
+    }
+  });
+
+  const reviewRoomId = compareNum[0];
+
+  const reserveCheck =
+    reservationUser && reservationUser.is_available && reviewRoomId;
 
   useEffect(() => {
     if (reserveCheck === true) {
@@ -65,6 +96,7 @@ export const ReviewModal = ({
           <ReviewWrite
             reviewModalActive={reviewModalActive}
             setIsReviewModalHandle={setIsReviewModalHandle}
+            reviewRoomId={reviewRoomId}
           />
         ) : null}
         <section>

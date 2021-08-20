@@ -1,17 +1,30 @@
-export const useProfileCallAfterLogin = (loginToken, PROFILE_API) => {
-  const [userInfo, userInfoLoading, userInfoErrorText] = useFetch(PROFILE_API, {
-    method: 'GET',
-    headers: loginToken.token,
+export const queryGenerator = query => {
+  let queryString = query.split('&');
+  let stayDate = queryString.map(date => {
+    return date.split('=')[1];
   });
 
-  const fetchResult = {
-    userInfo: { ...userInfo },
-  };
+  return stayDate;
+};
 
-  const fetchValid = {
-    userInfo: userInfo => userInfo.hasOwnProperty('userlevel'),
-  };
+export const postFetch = (url = '', headers = {}, body = {}) => {
+  const postCallBody = JSON.stringify(body);
+  const post = async () => {
+    try {
+      const postCall = await fetch(url, {
+        method: 'POST',
+        headers,
+        body: postCallBody,
+      });
+      const postRes = await postCall.json();
 
-  const isFetchValid = fetchResult =>
-    Object.entries(fetchResult).every(([key, value]) => fetchValid[key](value));
+      return postRes.message;
+    } catch (e) {
+      const result = e;
+      return result;
+    }
+  };
+  if (post() === 'SUCCESS') {
+    return 'test';
+  }
 };

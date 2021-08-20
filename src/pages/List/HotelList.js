@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import styled from 'styled-components';
+import { useProfile } from '../../hooks';
 import { theme } from '../../styles/theme';
 
 export const HotelList = ({ image, name, price, id }) => {
   const history = useHistory();
-  const [hotelDetailId, setHotelDetailId] = useState('');
+  const location = useLocation();
 
   function handleClick() {
-    console.log(id);
-    history.push(`/stays/${id}`);
+    history.push(`/stays/${id}${location.search}`);
   }
+
+  const [profile, profileLoading] = useProfile();
+
+  const { discount } = profile;
   return (
     <Hotel onClick={handleClick}>
       <Search>
@@ -22,9 +26,9 @@ export const HotelList = ({ image, name, price, id }) => {
         <Name>{name}</Name>
         {/* <Summary>{content}</Summary> */}
         <Price>
-          <span>74%</span>
-          <span>{price}</span>
-          <span>27500원</span>
+          <span>{discount * 100}%</span>
+          <span>{' ₩ ' + (price - price * discount)}</span>
+          <span>{' ₩ ' + price}</span>
         </Price>
       </Info>
     </Hotel>
@@ -58,23 +62,6 @@ const Search = styled.div`
   }
 `;
 
-const Overlay = styled.div`
-  display: flex;
-  position: absolute;
-  color: white;
-  bottom: 10px;
-  font-size: 12px;
-`;
-
-const Grade = styled.div`
-  border: 1px soild white;
-  padding: 0px 10px;
-`;
-
-const Point = styled.div`
-  position: relative;
-  left: 1000px;
-`;
 const Info = styled.div`
   padding: 14px 15px;
   border-bottom: 1px solid lightgray;
@@ -82,12 +69,6 @@ const Info = styled.div`
 
 const Name = styled.div`
   font-size: 18px;
-  margin-bottom: 6px;
-`;
-
-const Summary = styled.div`
-  font-size: 15px;
-  color: ${gray_3};
   margin-bottom: 6px;
 `;
 
@@ -106,11 +87,3 @@ const Price = styled.div`
     text-decoration: line-through;
   }
 `;
-
-{
-  /* <Overlay>
-  <Grade>특2급</Grade>
-  <span>(트루리뷰 3000개) </span>
-  <Point>적립</Point>
-</Overlay>; */
-}

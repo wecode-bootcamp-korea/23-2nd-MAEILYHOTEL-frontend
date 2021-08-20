@@ -7,14 +7,14 @@ import styled from 'styled-components';
 import { fontSet, boxSizeSet, border, flexSet } from '../../../styles/Mixins';
 import { DETAIL_PAGE } from '../../../config';
 
-export const DetailHotelRoom = ({ setCalendarOn }) => {
+export const DetailHotelRoom = ({
+  setCalendarOn,
+  roomListData,
+  pathName,
+  query,
+  listLoading,
+}) => {
   const [isFilterHandle, setIsFilterHandle] = useState(true);
-
-  const pathName = useLocation().pathname;
-  const query = useLocation().search;
-  const [roomListData, listLoading] = useFetch(
-    `${DETAIL_PAGE}${pathName}${query}`
-  );
 
   const avgButton = () => {
     setIsFilterHandle(false);
@@ -23,6 +23,8 @@ export const DetailHotelRoom = ({ setCalendarOn }) => {
   const totalButton = () => {
     setIsFilterHandle(true);
   };
+
+  const parameters = { pathName, query };
 
   return (
     !listLoading && (
@@ -39,7 +41,13 @@ export const DetailHotelRoom = ({ setCalendarOn }) => {
         </CostFilter>
         {roomListData?.data?.map((list, idx) => {
           return (
-            <RoomType key={idx} list={list} isFilterHandle={isFilterHandle} />
+            <RoomType
+              key={idx}
+              list={list}
+              isFilterHandle={isFilterHandle}
+              parameters={parameters}
+              roomListData={roomListData}
+            />
           );
         })}
         <RoomReservation color="#74B9ff" onClick={setCalendarOn}>
