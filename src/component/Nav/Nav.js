@@ -1,9 +1,10 @@
 import React from 'react';
-import { Icon } from './Icon';
-import { LoginButton } from './Login';
+import { IconsWrapper } from './IconsWrapper';
+import { LoginButton } from './LoginButton';
+import { USER_INFO } from '../../pages/Redirect/Redirect';
+
 import styled from 'styled-components';
 import { flexSet, fullScreen } from '../../styles/Mixins';
-import { USER_INFO } from '../../pages/Redirect/Redirect';
 
 export const Nav = () => {
   const userInfo = JSON.parse(localStorage.getItem(USER_INFO));
@@ -14,7 +15,7 @@ export const Nav = () => {
         <NavLogo alt="Logo" src="/images/logo.png" />
         <NavIconWrap>
           {name ? <Welcome>{name}님 환영합니다!</Welcome> : <LoginButton />}
-          <Icon LinkUrl="" />
+          <IconsWrapper LinkUrl="" />
         </NavIconWrap>
       </NavWrap>
     </NavContainer>
@@ -48,4 +49,8 @@ const NavWrap = styled.div`
 const NavContainer = styled.div`
   ${flexSet('center', 'initial', 'row')}
   ${fullScreen}
+  position: fixed;
+  top: 0;
+  background-color: white;
+  z-index: 98;
 `;
