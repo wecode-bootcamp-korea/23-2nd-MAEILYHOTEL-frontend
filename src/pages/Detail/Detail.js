@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { flexSet, fullScreen } from '../../styles/Mixins';
 import { DetailHotelImage } from './DetailHotelImage/DetailHotelImage';
 import { DetailHotelTitle } from './DetailHotelTitle/DetailHotelTitle';
 import { DetailHotelRoom } from './DetailHotelRoom/DetailHotelRoom';
@@ -8,9 +6,14 @@ import { DetailHotelInfo } from './DetailHotelInfo/DetailHotelInfo';
 import { DetailHotelFacility } from './DetailHotelFacility/DetailHotelFacility';
 import { DetailHotelMap } from './DetailHotelMap/DetailHotelMap';
 import { DetailHotelUsingHour } from './DetailHotelUsingHour/DetailHotelUsingHour';
+import { Calendar } from '../../component/Calendar';
+
+import styled from 'styled-components';
+import { flexSet, fullScreen } from '../../styles/Mixins';
 
 export const Detail = () => {
   const [hotelData, setHotelData] = useState([]);
+  const [calendarOn, setCalendarOn] = useState(false);
 
   useEffect(() => {
     fetch('/data/HOTEL_DATA.json')
@@ -23,18 +26,31 @@ export const Detail = () => {
   const { grade, title, cost } = hotelData[0] || {};
 
   return (
-    <DetailSection>
-      <DetailSectionWrap>
-        <DetailHotelImage />
-        <DetailHotelTitle grade={grade} title={title} cost={cost} />
-        {/* <Review>review</Review>     //리뷰 (추가 기능 구현 사항)*/}
-        <DetailHotelRoom />
-        <DetailHotelInfo />
-        <DetailHotelFacility />
-        <DetailHotelMap />
-        <DetailHotelUsingHour />
-      </DetailSectionWrap>
-    </DetailSection>
+    <>
+      <DetailSection>
+        <DetailSectionWrap>
+          <DetailHotelImage />
+          <DetailHotelTitle grade={grade} title={title} cost={cost} />
+          {/* <Review>review</Review>     //리뷰 (추가 기능 구현 사항)*/}
+          <DetailHotelRoom
+            setCalendarOn={() => {
+              setCalendarOn(true);
+            }}
+          />
+          <DetailHotelInfo />
+          <DetailHotelFacility />
+          <DetailHotelMap />
+          <DetailHotelUsingHour />
+        </DetailSectionWrap>
+      </DetailSection>
+      {calendarOn && (
+        <Calendar
+          setCalendarOn={() => {
+            setCalendarOn(false);
+          }}
+        />
+      )}
+    </>
   );
 };
 

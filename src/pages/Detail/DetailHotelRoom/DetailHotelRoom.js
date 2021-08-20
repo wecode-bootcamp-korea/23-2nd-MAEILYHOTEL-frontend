@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { fontSet, boxSizeSet, border } from '../../../styles/Mixins';
 
-export const DetailHotelRoom = () => {
+export const DetailHotelRoom = ({ setCalendarOn }) => {
   return (
     <RoomChoiceWrap>
       <RoomChoiceTitle>객실선택</RoomChoiceTitle>
       <RoomImage src="./images/hotel_1.jpg" alt="hotel" />
-      <RoomReservation color="#74B9ff">
+      <RoomReservation color="#74B9ff" onClick={setCalendarOn}>
         날짜 선택하고 객실 더보기
       </RoomReservation>
       <ChoiceInfo>

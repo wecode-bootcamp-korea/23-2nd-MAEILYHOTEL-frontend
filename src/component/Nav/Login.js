@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import { KAKAO_OAUTH } from '../../config';
+
+import styled from 'styled-components';
 import { flexSet } from '../../styles/Mixins';
 
 export const LoginButton = () => {

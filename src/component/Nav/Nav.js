@@ -1,9 +1,10 @@
 import React from 'react';
 import { Icon } from './Icon';
 import { LoginButton } from './Login';
+import { USER_INFO } from '../../pages/Redirect/Redirect';
+
 import styled from 'styled-components';
 import { flexSet, fullScreen } from '../../styles/Mixins';
-import { USER_INFO } from '../../pages/Redirect/Redirect';
 
 export const Nav = () => {
   const userInfo = JSON.parse(localStorage.getItem(USER_INFO));

@@ -12,7 +12,7 @@ export const DetailHotelInfo = () => {
         <InfoTitle>매일리's comment</InfoTitle>
       </InfoTitleWrap>
       {INFO_LIST.map((list, idx) => {
-        return <InfoList id={idx} num={list.num} text={list.text} />;
+        return <InfoList key={idx} num={list.num} text={list.text} />;
       })}
     </HotelInfoWrap>
   );

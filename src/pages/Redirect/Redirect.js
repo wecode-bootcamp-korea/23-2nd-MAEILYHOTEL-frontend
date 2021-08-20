@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import { useKakaoLogin } from '../../hooks';
+
 import styled, { keyframes } from 'styled-components';
 import { flexSet, fullScreen } from '../../styles/Mixins';
-import { useKakaoLogin } from './KakaoLoginLogic';
 
 export const Redirect = () => {
   const history = useHistory();

@@ -10,7 +10,7 @@ export const DetailHotelTitle = ({ grade, title, cost }) => {
       <HotelTitle>{title}</HotelTitle>
       <CostWrap>
         <HotelCost>{cost}</HotelCost>
-        <span>원 부터</span>
+        <span>원</span>
       </CostWrap>
       <DateStandard>(8월 24일 투숙 기준)</DateStandard>
       <DownloadCoupon />

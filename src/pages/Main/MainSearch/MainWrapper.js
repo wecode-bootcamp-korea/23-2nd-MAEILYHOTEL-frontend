@@ -1,5 +1,6 @@
 import React from 'react';
 import { MainSearchForm } from './MainSearchForm';
+
 import styled from 'styled-components';
 import { flexSet } from '../../../styles/Mixins';
 
