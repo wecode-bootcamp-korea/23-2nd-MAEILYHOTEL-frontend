@@ -20,6 +20,7 @@ export const useFetch = (
 
       const json = await response.json();
       setResponseData(json);
+      console.log(json);
     } catch (e) {
       setError(e);
     } finally {

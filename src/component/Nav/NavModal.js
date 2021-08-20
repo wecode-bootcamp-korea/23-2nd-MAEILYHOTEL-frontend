@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GRADE, LOGIN_TOKEN } from '../../config';
 
 import styled from 'styled-components';
+import { useProfile } from '../../hooks';
+import { useLocation } from 'react-router';
 
-export const NavModal = ({ handleModal, userInfo }) => {
+export const NavModal = ({ handleModal }) => {
   const token = localStorage.getItem(LOGIN_TOKEN);
 
-  const { name, userlevel, agreement, point } = userInfo;
+  const [userProfile, loading] = useProfile();
 
-  const [toggle, settoggle] = useState(agreement);
-  const [grade, setgrade] = useState(userlevel);
+  const { name, userlevel, agreement, point } = userProfile;
+
+  const [toggle, setToggle] = useState(false);
+  const [grade, setGrade] = useState('');
+
+  console.log(grade, agreement, toggle, userlevel, userProfile);
 
   const onOff = () => {
-    settoggle(!toggle);
+    setToggle(!toggle);
     gradeRequest();
   };
 
@@ -30,15 +36,20 @@ export const NavModal = ({ handleModal, userInfo }) => {
       .then(res => res.json())
       .then(({ agreement, userlevel }) => {
         if (agreement) {
-          setgrade(userlevel);
+          setGrade(userlevel);
         } else {
-          setgrade(userlevel);
+          setGrade(userlevel);
         }
       });
   };
 
+  useEffect(() => {
+    setToggle(agreement);
+    setGrade(userlevel);
+  }, [loading]);
+
   return (
-    userInfo && (
+    !loading && (
       <Modal>
         <Name>
           {name ? `${name}님` : '로그인 해주세요.'}
