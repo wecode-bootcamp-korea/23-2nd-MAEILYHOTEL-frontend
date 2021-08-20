@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { USER_INFO } from '../../pages/Redirect/Redirect';
+import { LOGIN_TOKEN } from '../../hooks';
 import { GRADE } from '../../config';
+
 import styled from 'styled-components';
 
-export const NavModal = ({ handleModal }) => {
-  const [toggle, settoggle] = useState(false);
-  const [grade, setgrade] = useState('SILVER');
+export const NavModal = ({ handleModal, userInfo }) => {
+  const token = localStorage.getItem(LOGIN_TOKEN);
 
-  const userInfo = JSON.parse(localStorage.getItem(USER_INFO));
+  const { name, userlevel, agreement, point } = userInfo;
+
+  const [toggle, settoggle] = useState(agreement);
+  const [grade, setgrade] = useState(userlevel);
 
   const onOff = () => {
     settoggle(!toggle);
@@ -18,52 +21,56 @@ export const NavModal = ({ handleModal }) => {
     fetch(`${GRADE}`, {
       method: 'PATCH',
       headers: {
-        Authorization: userInfo.token,
+        Authorization: token,
       },
       body: JSON.stringify({
-        agreement: toggle ? 'False' : 'True',
-        userlevel: toggle ? 1 : 2,
+        agreement: !toggle,
+        userlevel: toggle ? 'silver' : 'gold',
       }),
     })
       .then(res => res.json())
       .then(res => {
-        if (res.id === 2) {
-          setgrade('GOLD');
-        } else if (res.id === 1) {
-          setgrade('SILVER');
+        if (res.agreement) {
+          setgrade(res.userlevel);
+        } else {
+          setgrade(res.userlevel);
         }
       });
   };
 
   return (
-    <Modal>
-      <Name>
-        {userInfo ? `${userInfo.name}님` : '로그인 해주세요.'}
-        {userInfo && grade && <Grade>{grade}</Grade>}
-        <br />
-        <Xmark>
-          <i className="fas fa-times" onClick={handleModal}></i>
-        </Xmark>
-        <Button>내 정보 수정</Button>
-        <Icon>
-          <i className="far fa-handshake">약관동의</i>
-          <Toggle onClick={onOff}>{toggle ? 'ON' : 'OFF'}</Toggle>
-          <i className="far fa-file-alt">예약 / 구매내역</i>
-          <i className="far fa-heart">위시리스트</i>
-          <i className="far fa-user">마이매일리</i>
-        </Icon>
-      </Name>
-    </Modal>
+    userInfo && (
+      <Modal>
+        <Name>
+          {name ? `${name}님` : '로그인 해주세요.'}
+          {grade && <Grade>{grade === 'silver' ? 'SILVER' : 'GOLD'}</Grade>}
+          <br />
+          {point && (
+            <Point>잔여 포인트 : ₩ {Math.floor(point).toLocaleString()}</Point>
+          )}
+          <Xmark>
+            <i className="fas fa-times" onClick={handleModal}></i>
+          </Xmark>
+          <Button>내 정보 수정</Button>
+          <Icon>
+            <i className="far fa-handshake">약관동의</i>
+            {name && <Toggle onClick={onOff}>{toggle ? 'OFF' : 'ON'}</Toggle>}
+            <i className="far fa-file-alt">예약 / 구매내역</i>
+            <i className="far fa-heart">위시리스트</i>
+            <i className="far fa-user">마이매일리</i>
+          </Icon>
+        </Name>
+      </Modal>
+    )
   );
 };
 
 const Modal = styled.div`
-  z-index: 9999;
+  z-index: 100;
   position: fixed;
   top: -1px;
   right: 165px;
   width: 322px;
-  height: 250px;
 
   background-color: white;
   border: 1px solid rgb(231, 231, 231);
@@ -84,14 +91,11 @@ const Xmark = styled.div`
   color: ${props => props.theme.colors.gray_3};
 `;
 
-const Icon = styled.div`
-  i {
-    color: black;
-    margin-bottom: 10px;
-    display: block;
-    margin: 22px 0px;
-    font-size: 15px;
-  }
+const Grade = styled.span`
+  margin-left: 20px;
+  font-size: 12px;
+  padding: 5px;
+  border: 1px solid black;
 `;
 
 const Button = styled.button`
@@ -103,6 +107,16 @@ const Button = styled.button`
   height: 30px;
 `;
 
+const Icon = styled.div`
+  i {
+    color: black;
+    margin-bottom: 10px;
+    display: block;
+    margin: 22px 0px;
+    font-size: 15px;
+  }
+`;
+
 const Toggle = styled.button`
   position: absolute;
   bottom: 128px;
@@ -110,9 +124,6 @@ const Toggle = styled.button`
   width: 43px;
 `;
 
-const Grade = styled.span`
-  margin-left: 20px;
-  font-size: 12px;
-  padding: 5px;
-  border: 1px solid black;
+const Point = styled.p`
+  margin-top: 10px;
 `;

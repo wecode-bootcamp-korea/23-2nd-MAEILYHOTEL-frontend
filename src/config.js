@@ -1,4 +1,4 @@
-const API_IP = 'http://10.58.0.153:8000';
+const API_IP = 'http://10.58.2.242:8000';
 
 export const REDIRECT_URI = 'http://localhost:3000/users/kakao';
 

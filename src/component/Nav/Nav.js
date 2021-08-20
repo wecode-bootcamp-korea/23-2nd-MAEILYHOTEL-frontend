@@ -1,22 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router';
+import { useProfile } from '../../hooks';
 import { IconsWrapper } from './IconsWrapper';
 import { LoginButton } from './LoginButton';
-import { USER_INFO } from '../../pages/Redirect/Redirect';
 
 import styled from 'styled-components';
 import { flexSet, fullScreen } from '../../styles/Mixins';
 
 export const Nav = () => {
-  const userInfo = JSON.parse(localStorage.getItem(USER_INFO));
-  const { name } = userInfo || {};
+  const [modalOn, setModalOn] = useState(false);
+  const location = useLocation();
+
+  const [userProfile, loading] = useProfile(location.pathname);
+
+  const { point, name } = userProfile;
+
   return (
     <NavContainer>
       <NavWrap>
         <NavLogo alt="Logo" src="/images/logo.png" />
-        <NavIconWrap>
-          {name ? <Welcome>{name}님 환영합니다!</Welcome> : <LoginButton />}
-          <IconsWrapper LinkUrl="" />
-        </NavIconWrap>
+        {userProfile && !loading && (
+          <NavIconWrap>
+            {!(name && point) && <LoginButton />}
+            <IconsWrapper
+              modal={modalOn}
+              modalOn={() => {
+                setModalOn(true);
+              }}
+              modalOff={() => {
+                setModalOn(false);
+              }}
+              userInfo={userProfile}
+            />
+          </NavIconWrap>
+        )}
       </NavWrap>
     </NavContainer>
   );
@@ -42,6 +59,7 @@ const NavLogo = styled.img`
 const NavWrap = styled.div`
   ${flexSet('space-between', 'center', 'row')}
   width: 100%;
+  height: 67px;
   padding: 10px 0;
   max-width: 1180px;
 `;

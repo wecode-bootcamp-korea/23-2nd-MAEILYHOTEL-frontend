@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import { useKakaoLogin } from '../../hooks';
+import { useKakaoLogin, useFetch } from '../../hooks';
 
 import styled, { keyframes } from 'styled-components';
 import { flexSet, fullScreen } from '../../styles/Mixins';
@@ -13,7 +13,6 @@ export const Redirect = () => {
 
   useEffect(() => {
     if (!loading && !errorText) {
-      localStorage.setItem(USER_INFO, JSON.stringify(userInfo));
       history.push('/');
     } else if (loading && errorText) {
       alert('죄송합니다. 현재 서버가 불안정하니 잠시 후에 다시 시도해주세요.');
@@ -27,8 +26,6 @@ export const Redirect = () => {
     </Section>
   );
 };
-
-export const USER_INFO = 'userInfo';
 
 const BingleBingle = keyframes`
 from {
