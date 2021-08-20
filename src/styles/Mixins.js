@@ -46,6 +46,6 @@ export const listHover = keyframes`
 }
 
 100%{
-  opacity : 1;
+  opacity : 1; 
 }
 `;

@@ -1,16 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
+import { NavModal } from './NavModal';
 
-export const IconsWrapper = ({ LinkUrl }) => {
+export const IconsWrapper = ({ modal, modalOn, modalOff, userInfo }) => {
   return (
-    <StyledLink to={LinkUrl}>
-      <i className="fas fa-list-ul" />
-    </StyledLink>
+    <Icons>
+      <i className="fas fa-list-ul" onClick={modalOn} />
+      {modal && <NavModal handleModal={modalOff} userInfo={userInfo} />}
+    </Icons>
   );
 };
 
-const StyledLink = styled(Link)`
+const Icons = styled.span`
   color: black;
+  cursor: pointer;
 `;
