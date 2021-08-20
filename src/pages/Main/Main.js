@@ -32,7 +32,7 @@ export const Main = () => {
           stayDate={stayDate}
           setStayLocation={setStayLocation}
           titleText="여행지를 선택해주세요"
-          linkUrl="/stays"
+          linkUrl={`/list?location=${stayLocation}&CheckIn=${stayDate[0]}&CheckOut=${stayDate[1]}`}
         />
       )}
       {calendarOn && (
@@ -49,7 +49,7 @@ export const Main = () => {
               ? `${stayDate[0]} ~ ${stayDate[1]} 예약하기`
               : '날짜를 선택해주세요'
           }
-          linkUrl="/stays"
+          linkUrl={`/list?location=${stayLocation}&CheckIn=${stayDate[0]}&CheckOut=${stayDate[1]}`}
           redirectComponent="/"
         />
       )}

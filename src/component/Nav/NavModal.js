@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { LOGIN_TOKEN } from '../../hooks';
-import { GRADE } from '../../config';
+import { GRADE, LOGIN_TOKEN } from '../../config';
 
 import styled from 'styled-components';
 
@@ -29,11 +28,11 @@ export const NavModal = ({ handleModal, userInfo }) => {
       }),
     })
       .then(res => res.json())
-      .then(res => {
-        if (res.agreement) {
-          setgrade(res.userlevel);
+      .then(({ agreement, userlevel }) => {
+        if (agreement) {
+          setgrade(userlevel);
         } else {
-          setgrade(res.userlevel);
+          setgrade(userlevel);
         }
       });
   };
@@ -88,7 +87,7 @@ const Xmark = styled.div`
   left: 280px;
   bottom: 20px;
   margin: 0px;
-  color: ${props => props.theme.colors.gray_3};
+  color: ${({ theme }) => theme.colors.gray_3};
 `;
 
 const Grade = styled.span`

@@ -11,8 +11,8 @@ export const NextLink = ({ linkInfo, dateRange, setCalendarOff }) => {
   return (
     <StyledLink
       to={{
-        pathname: stayLocation ? path[0] : redirectPath[0],
-        search: redirectPath[0] ? redirectPath[1] : path[1],
+        pathname: stayLocation ? path : redirectPath,
+        search: stayLocation ? query : redirectQuery,
       }}
     >
       <NextStepButton
