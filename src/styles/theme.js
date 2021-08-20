@@ -6,6 +6,7 @@ const colors = {
   gray_3: '#929292',
   green_1: '#3cb46e',
   blue: '#74b9ff',
+  pink: '#ff7675',
 };
 
 export const theme = {

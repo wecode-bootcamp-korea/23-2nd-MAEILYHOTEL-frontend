@@ -6,18 +6,7 @@ import { RoomType } from './RoomType';
 import styled from 'styled-components';
 import { fontSet, boxSizeSet, border, flexSet } from '../../../styles/Mixins';
 
-export const DetailHotelRoom = () => {
-  // const [roomCategori, setRoomCategori] = useState([]);
-
-  // useEffect(() => {
-  // fetch(`${API_IP}/${params.id}`);       // 벨로그 작성 후 삭제예정
-  //   fetch()
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       setRoomCategori(res);
-  //     });
-  // }, []);
-
+export const DetailHotelRoom = ({ setCalendarOn }) => {
   const [roomListData, loading] = useFetch('/data/ROOM_DATA.json');
   // const [roomListData, loading] = useFetch(
   //   `${DETAIL_PAGE}/3/rooms?CheckIn=2021-08-01&CheckOut=2021-08-03`  // 실제 사용 코드
@@ -50,7 +39,7 @@ export const DetailHotelRoom = () => {
             <RoomType key={idx} list={list} isFilterHandle={isFilterHandle} />
           );
         })}
-        <RoomReservation color="#74B9ff">
+        <RoomReservation color="#74B9ff" onClick={setCalendarOn}>
           날짜 선택하고 객실 더보기
         </RoomReservation>
       </RoomChoiceWrap>

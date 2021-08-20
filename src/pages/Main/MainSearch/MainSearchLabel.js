@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styled, { css } from 'styled-components';
 import { flexSet } from '../../../styles/Mixins';
 
@@ -6,7 +7,7 @@ export const MainSearchLabel = ({ text, bgColor, ...rest }) => {
   return (
     <SearchLabel bgColor={bgColor}>
       <SearchText>{text}</SearchText>
-      <SearchInput bgColor={bgColor} {...rest}></SearchInput>
+      <SearchInput bgColor={bgColor} {...rest} />
     </SearchLabel>
   );
 };
@@ -28,7 +29,6 @@ const SearchInput = styled.input`
     font-size: ${fontSize || '16px'};
     text-align: ${textAlign || 'left'};
   `}
-
   outline: none;
 `;
 
@@ -39,4 +39,5 @@ const SearchLabel = styled.label`
   padding: 0 35px;
   border-radius: 30px;
   background-color: ${({ bgColor }) => bgColor || 'white'};
+  z-index: 3;
 `;
