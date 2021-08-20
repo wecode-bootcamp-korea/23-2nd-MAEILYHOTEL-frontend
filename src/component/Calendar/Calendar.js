@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 import DatePicker from 'react-datepicker';
 import { ko } from 'date-fns/locale';
 import { CalendarWrapper } from './CalendarWrapper';
@@ -6,6 +7,7 @@ import { NextLink } from './NextLink';
 
 import { useFetch } from '../../hooks';
 import { calcDateRange, dateConversion } from './CalendarLogic';
+import { DETAIL_PAGE } from '../../config';
 
 import styled from 'styled-components';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -23,8 +25,18 @@ export const Calendar = ({
 }) => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
-  const [bookInfo, loading] = useFetch('/data/CALENDAR.json');
+
   const [excludeDays, setExcludeDays] = useState([]);
+
+  const location = useLocation();
+
+  const [, commonPath, id] = location.pathname.split('/');
+
+  const [bookInfo, loading] = useFetch(
+    `${DETAIL_PAGE}/${commonPath}/${id}/calendar?Date=${dateConversion(
+      new Date()
+    )}`
+  );
 
   const excludeDay = bookInfo => {
     const dates = Object.entries(bookInfo.result);
@@ -57,7 +69,7 @@ export const Calendar = ({
     }
   }, [loading]);
 
-  return bookInfo.result ? (
+  return (
     <CalendarWrapper>
       <Button onClick={setCalendarOff}>X</Button>
       <StyledDatePicker
@@ -93,7 +105,7 @@ export const Calendar = ({
         />
       )}
     </CalendarWrapper>
-  ) : null;
+  );
 };
 
 const Button = styled.button`

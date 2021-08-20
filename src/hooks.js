@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { KAKAO_LOGIN, PROFILE_API, REDIRECT_URI } from './config';
+import { KAKAO_LOGIN, LOGIN_TOKEN, PROFILE_API, REDIRECT_URI } from './config';
 
 export const useFetch = (
   url = '',
