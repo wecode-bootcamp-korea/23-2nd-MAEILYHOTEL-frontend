@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css, keyframes } from 'styled-components';
 
 export const flexSet = (justifyContent, alignItems, flexDirection) => css`
   display: flex;
@@ -38,4 +38,14 @@ export const boxSizeSet = (
 export const border = (border, borderRadius) => css`
   border: ${border};
   border-radius: ${borderRadius};
+`;
+
+export const listHover = keyframes`
+0%{
+  opacity : 0;
+}
+
+100%{
+  opacity : 1;
+}
 `;

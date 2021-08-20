@@ -8,17 +8,20 @@ export const useFetch = (
 ) => {
   const [responseData, setResponseData] = useState({});
   const [loading, setLoading] = useState(true);
+  // 시작과 동시에 로딩 start => true
   const [error, setError] = useState('');
 
   const fetchUrl = async () => {
     try {
       const response = await fetch(url, methodOptions);
+      // 입력받은 url과 {method : ?, body : ?} 등의 옵션으로 fetch() 실행
 
       if (!response.ok) {
         throw new Error(response.status);
       }
 
       const json = await response.json();
+      // 응답 결과 -> .then(res => res.json()) 과 같은 과정
       setResponseData(json);
     } catch (e) {
       setError(e);
@@ -26,10 +29,11 @@ export const useFetch = (
       setLoading(false);
     }
   };
-
   useEffect(() => {
     fetchUrl();
-  }, []);
+  }, [url]);
+  // componentDidMount, useEffect 의 2번째 인자 ([]) 빈 배열을 넣었을 경우, class component 기준 CDM과 같이 동작합니다.
+  // 따라서 해당 fetchUrl 이라는 함수는 useFetch가 실행되고 1회만 실행됩니다.
 
   return [responseData, loading, error];
 };

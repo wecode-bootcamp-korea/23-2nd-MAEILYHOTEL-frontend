@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useFetch } from '../../hooks';
-// import { DETAIL_PAGE } from '../../config';              // 실제 사용 코드
-import { DetailCommon } from '../../component/Detail/DetailCommon';
+import { useRouteMatch } from 'react-router-dom';
 
+import { DetailCommon } from '../../component/Detail/DetailCommon';
 import { DetailHotelTitle } from './DetailHotelTitle/DetailHotelTitle';
 import { DetailHotelRoom } from './DetailHotelRoom/DetailHotelRoom';
 import { DetailHotelInfo } from './DetailHotelInfo/DetailHotelInfo';
@@ -14,11 +14,18 @@ import { Calendar } from '../../component/Calendar/Calendar';
 import styled from 'styled-components';
 import { fullScreen } from '../../styles/Mixins';
 
+import { DETAIL_PAGE } from '../../config';
+
 export const Detail = () => {
   const [isModalHandle, setIsModalHandle] = useState(false);
-  const [hotelData, loading] = useFetch('/data/HOTEL_DATA.json');
-  // const [hotelData, loading] = useFetch(`${DETAIL_PAGE}/3`); // 실제 사용 코드
   const [calendarOn, setCalendarOn] = useState(false);
+  const [stayDate, setStayDate] = useState([]);
+
+  const match = useRouteMatch();
+
+  const [hotelData, loading] = useFetch(
+    `${DETAIL_PAGE}/stays/${match.params.id}`
+  );
 
   const modalActive = () => {
     setIsModalHandle(!isModalHandle);
@@ -37,7 +44,7 @@ export const Detail = () => {
     description,
     check_in,
     check_out,
-  } = hotelData[0] || {};
+  } = hotelData || {};
 
   return (
     !loading && (
@@ -54,6 +61,7 @@ export const Detail = () => {
               setCalendarOn={() => {
                 setCalendarOn(true);
               }}
+              stayDate={stayDate}
             />
             <DetailHotelInfo name={name} description={description} />
             <DetailHotelFacility
@@ -67,7 +75,7 @@ export const Detail = () => {
             modalActive={modalActive}
             name={name}
             lat={lat}
-            lng={long}
+            long={long}
           />
         </DetailSection>
         {calendarOn && (
@@ -75,8 +83,16 @@ export const Detail = () => {
             setCalendarOff={() => {
               setCalendarOn(false);
             }}
+            setStayDate={setStayDate}
             priceDisplay={true}
             excludeOn={true}
+            linkButtonText={
+              stayDate[1]
+                ? `${stayDate[0]} ~ ${stayDate[1]} 예약하기`
+                : '날짜를 선택해주세요'
+            }
+            linkUrl={`/stays/${match.params.id}/rooms?CheckIn=${stayDate[0]}&CheckOut=${stayDate[1]}`}
+            redirectComponent={`/stays/${match.params.id}/rooms?CheckIn=${stayDate[0]}&CheckOut=${stayDate[1]}`}
           />
         )}
       </>

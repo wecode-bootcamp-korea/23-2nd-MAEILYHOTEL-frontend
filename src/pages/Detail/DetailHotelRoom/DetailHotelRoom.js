@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { useFetch } from '../../../hooks';
 import { RoomType } from './RoomType';
-// import { DETAIL_PAGE } from '../../../config';                         // 실제 사용 코드
+import { useLocation } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { fontSet, boxSizeSet, border, flexSet } from '../../../styles/Mixins';
+import { DETAIL_PAGE } from '../../../config';
 
 export const DetailHotelRoom = ({ setCalendarOn }) => {
-  const [roomListData, loading] = useFetch('/data/ROOM_DATA.json');
-  // const [roomListData, loading] = useFetch(
-  //   `${DETAIL_PAGE}/3/rooms?CheckIn=2021-08-01&CheckOut=2021-08-03`  // 실제 사용 코드
-  // );
   const [isFilterHandle, setIsFilterHandle] = useState(true);
+
+  const pathName = useLocation().pathname;
+  const query = useLocation().search;
+  const [roomListData, listLoading] = useFetch(
+    `${DETAIL_PAGE}${pathName}${query}`
+  );
 
   const avgButton = () => {
     setIsFilterHandle(false);
@@ -22,7 +25,7 @@ export const DetailHotelRoom = ({ setCalendarOn }) => {
   };
 
   return (
-    !loading && (
+    !listLoading && (
       <RoomChoiceWrap>
         <RoomChoiceTitle>객실선택</RoomChoiceTitle>
         <ChoiceDate>날짜</ChoiceDate>

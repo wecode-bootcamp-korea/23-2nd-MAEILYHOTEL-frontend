@@ -6,6 +6,7 @@ import { Detail } from './pages/Detail/Detail';
 import { List } from './pages/List/List';
 import { Main } from './pages/Main/Main';
 import { Redirect } from './pages/Redirect/Redirect';
+import { Credit } from './pages/Credit/Credit';
 
 class Routes extends React.Component {
   render() {
@@ -15,9 +16,10 @@ class Routes extends React.Component {
         <Switch>
           <Route exact path="/" component={Main} />
           <Route exact path="/list" component={List} />
-          <Route exact path="/detail" component={Detail} />
           <Route exact path="/users/kakao" component={Redirect} />
           <Route exact path="/navmodal" component={NavModal} />
+          <Route exact path="/stays/:id/rooms" component={Detail} />
+          <Route exact path="/credit" component={Credit} />
         </Switch>
       </Router>
     );

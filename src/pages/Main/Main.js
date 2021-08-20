@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { MainWrapper } from './MainSearch/MainWrapper';
 import { Calendar } from '../../component/Calendar/Calendar';
 import { LocationModal } from './LocationModal/LocationModal';
@@ -12,8 +11,6 @@ export const Main = () => {
   const [locationModalOn, setLocationModalOn] = useState(false);
   const [stayLocation, setStayLocation] = useState('');
   const [stayDate, setStayDate] = useState([]);
-
-  const history = useHistory();
 
   return (
     <Section>
@@ -35,7 +32,7 @@ export const Main = () => {
           stayDate={stayDate}
           setStayLocation={setStayLocation}
           titleText="여행지를 선택해주세요"
-          linkUrl="/stay"
+          linkUrl="/stays"
         />
       )}
       {calendarOn && (
@@ -52,7 +49,7 @@ export const Main = () => {
               ? `${stayDate[0]} ~ ${stayDate[1]} 예약하기`
               : '날짜를 선택해주세요'
           }
-          linkUrl="/stay"
+          linkUrl="/stays"
           redirectComponent="/"
         />
       )}

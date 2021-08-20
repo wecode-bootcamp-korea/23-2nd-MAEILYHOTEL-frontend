@@ -4,12 +4,12 @@ import { ko } from 'date-fns/locale';
 import { CalendarWrapper } from './CalendarWrapper';
 import { NextLink } from './NextLink';
 
+import { useFetch } from '../../hooks';
+import { calcDateRange, dateConversion } from './CalendarLogic';
+
 import styled from 'styled-components';
 import 'react-datepicker/dist/react-datepicker.css';
 import { flexSet } from '../../styles/Mixins';
-
-import { useFetch } from '../../hooks';
-import { calcDateRange, dateConversion } from './CalendarLogic';
 
 export const Calendar = ({
   priceDisplay,
@@ -81,10 +81,15 @@ export const Calendar = ({
       />
       {linkUrl && linkButtonText && (
         <NextLink
-          linkInfo={{ stayLocation, linkUrl, linkButtonText }}
+          linkInfo={{
+            stayLocation,
+            linkUrl,
+            linkButtonText,
+            redirectComponent,
+          }}
           dateRange={dateRange}
           setCalendarOff={setCalendarOff}
-          redirectComponent={redirectComponent}
+          setStayDate={setStayDate}
         />
       )}
     </CalendarWrapper>

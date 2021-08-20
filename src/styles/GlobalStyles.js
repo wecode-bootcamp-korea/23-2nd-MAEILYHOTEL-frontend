@@ -8,10 +8,6 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing : border-box;
   } 
 
-  label, input, form {
-    cursor: pointer;
-  }
-
    form, label, input, button {
     cursor: pointer;
   }
