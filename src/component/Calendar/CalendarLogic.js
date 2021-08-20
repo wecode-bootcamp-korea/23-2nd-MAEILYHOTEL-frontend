@@ -15,11 +15,15 @@ export function calcDateRange(dateRange) {
 
   let startDay =
     dateRange[0] &&
-    `${dateRange[0].getFullYear()}-${dateRange[0].getMonth()}-${dateRange[0].getDate()}`;
+    `${dateRange[0].getFullYear()}-${
+      dateRange[0].getMonth() + 1
+    }-${dateRange[0].getDate()}`;
 
   let endDay =
     dateRange[1] &&
-    `${dateRange[1].getFullYear()}-${dateRange[1].getMonth()}-${dateRange[1].getDate()}`;
+    `${dateRange[1].getFullYear()}-${
+      dateRange[1].getMonth() + 1
+    }-${dateRange[1].getDate()}`;
 
   return [startDay, endDay, stay];
 }

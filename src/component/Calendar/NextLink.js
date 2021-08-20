@@ -1,27 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { calcDateRange } from './CalendarLogic';
 
 import styled from 'styled-components';
 
-export const NextLink = ({
-  linkInfo,
-  dateRange,
-  setCalendarOff,
-  redirectComponent,
-}) => {
-  const { stayLocation, linkUrl, linkButtonText } = linkInfo;
-  const stayInfo = calcDateRange(dateRange);
+export const NextLink = ({ linkInfo, dateRange, setCalendarOff }) => {
+  const { stayLocation, linkUrl, linkButtonText, redirectComponent } = linkInfo;
+  const [path, query] = linkUrl.split('?');
+  const [redirectPath, redirectQuery] = redirectComponent.split('?');
 
   return (
     <StyledLink
       to={{
-        pathname: stayLocation ? linkUrl : redirectComponent,
-        state: { stayInfo },
+        pathname: stayLocation ? path[0] : redirectPath[0],
+        search: redirectPath[0] ? redirectPath[1] : path[1],
       }}
     >
       <NextStepButton
-        disabled={dateRange[1] !== null || stayLocation ? false : true}
+        disabled={!(dateRange[1] !== null || stayLocation)}
         onClick={setCalendarOff}
       >
         {linkButtonText}

@@ -6,5 +6,8 @@ export const KAKAO_OAUTH = `https://kauth.kakao.com/oauth/authorize?client_id=${
 
 export const KAKAO_LOGIN = `${API_IP}/users/kakao`;
 
-export const DETAIL_PAGE = `${API_IP}/stays`;
+export const DETAIL_PAGE = `${API_IP}`;
+
 export const GRADE = `${API_IP}/users/level`;
+
+export const PROFILE_API = `${API_IP}/users/profile`;
