@@ -1,6 +1,7 @@
 import React from 'react';
 import { IconsWrapper } from './IconsWrapper';
 import { LoginButton } from './LoginButton';
+
 import { USER_INFO } from '../../pages/Redirect/Redirect';
 
 import styled from 'styled-components';

@@ -1,4 +1,6 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+
 import styled from 'styled-components';
 import { theme } from '../../styles/theme';
 
@@ -10,23 +12,24 @@ export const HotelList = ({
   price,
   preprice,
 }) => {
+  const history = useHistory();
+  function handleClick() {
+    history.push('/detail');
+  }
+
   return (
     <Hotel>
       <Search>
         <img alt="rose" src={image} />
         <i class="far fa-heart" />
-        <Overlay>
-          <Grade>특2급</Grade>
-          <span>(트루리뷰 3000개) </span>
-          <Point>적립</Point>
-        </Overlay>
       </Search>
       <Info>
         <Name>{name}</Name>
         <Summary>{content}</Summary>
         <Price>
-          <span>{percent}</span> <span>{price}</span>
-          <span>{preprice}</span>
+          <span>74%</span>
+          <span>{price}</span>
+          <span>27500원</span>
         </Price>
       </Info>
     </Hotel>
@@ -38,6 +41,7 @@ const { gray_3 } = theme.colors;
 const Hotel = styled.ul`
   background-color: white;
   border-top: 18px solid #f8f8f9;
+  cursor: pointer;
 `;
 
 const Search = styled.div`
@@ -107,3 +111,11 @@ const Price = styled.div`
     text-decoration: line-through;
   }
 `;
+
+{
+  /* <Overlay>
+  <Grade>특2급</Grade>
+  <span>(트루리뷰 3000개) </span>
+  <Point>적립</Point>
+</Overlay>; */
+}

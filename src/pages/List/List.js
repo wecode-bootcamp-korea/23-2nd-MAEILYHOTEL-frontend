@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import { HotelList } from './HotelList';
+import { useHistory } from 'react-router-dom';
+
+import styled from 'styled-components';
 import { flexSet } from '../../styles/Mixins';
 
 export const List = () => {
   const [hotels, sethotels] = useState([]);
+  const history = useHistory();
+  function handleClick() {
+    history.push('/detail');
+  }
 
   useEffect(() => {
     fetch('/data/listMockdata.json')
@@ -24,7 +30,7 @@ export const List = () => {
         <Content>호텔</Content>
         <Content>부띠끄/모텔</Content>
       </Filter>
-      <Count>결과 1020건</Count>
+      {/* <Count>결과 1020건</Count> */}
       {hotels.map(({ id, name, content, image, price, percent, preprice }) => {
         return (
           <HotelList
@@ -66,10 +72,13 @@ const Filter = styled.div`
   height: 39px;
 `;
 
-const Content = styled.div`
+const Content = styled.button`
   font-size: 14px;
   color: gray;
   padding: 11px 12px;
+  background-color: white;
+  cursor: pointer;
+  border: none;
 `;
 
 const Count = styled.div`
