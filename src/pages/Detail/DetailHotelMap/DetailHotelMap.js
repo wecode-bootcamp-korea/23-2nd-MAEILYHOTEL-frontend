@@ -1,13 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
-import { boxSizeSet, flexSet, fontSet } from '../../../styles/Mixins';
+import { AddressBox } from './AddressBox';
 
-export const DetailHotelMap = () => {
+import styled from 'styled-components';
+import { boxSizeSet } from '../../../styles/Mixins';
+
+export const DetailHotelMap = ({ modalActive, address }) => {
   return (
-    <HotelMapWarp>
+    <HotelMapWarp onClick={modalActive}>
       <HotelMapInner>
-        <AddressBox>
-          <HotelAddress>서울 용산구 소월로 322</HotelAddress>
+        <AddressBox address={address}>
           <HotelAddressIcon color="#74B9ff">
             <i className="far fa-map" />
           </HotelAddressIcon>
@@ -26,19 +27,6 @@ const HotelMapWarp = styled.div`
 const HotelMapInner = styled.div`
   ${boxSizeSet('inherit', '130px', 'none', '10px 20px')};
   background-color: white;
-`;
-
-const AddressBox = styled.div`
-  ${boxSizeSet('100%', 'none', '0', '20px 20px')};
-  ${flexSet('space-between', 'inherit', 'inherit')}
-  border-bottom: 1px solid #e7e7e7;
-  cursor: pointer;
-`;
-
-const HotelAddress = styled.span`
-  ${fontSet('14px', '#4d4d4d')};
-  ${flexSet('center', 'center', 'inherit')};
-  padding-right: 10px;
 `;
 
 const HotelAddressIcon = styled.div`

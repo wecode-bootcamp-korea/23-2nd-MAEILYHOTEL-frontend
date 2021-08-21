@@ -1,29 +1,22 @@
 import React from 'react';
-import styled from 'styled-components';
-import { fontSet, flexSet } from '../../../styles/Mixins';
+import { FacilitiesIconWrap } from './FacilitiesIconWrap';
 
-export const DetailHotelFacility = () => {
+import styled from 'styled-components';
+import { fontSet } from '../../../styles/Mixins';
+
+export const DetailHotelFacility = ({ total_rooms, facilities }) => {
   return (
     <FacilityWrap>
       <FacilityTitle>업장 내 편의시설</FacilityTitle>
       <RoomCountWrap>
         <span>객실 수: </span>
-        <span>615</span>
+        <span>{total_rooms}</span>
         <span>개</span>
       </RoomCountWrap>
       <FacilityIconWrap>
-        <FacilityIconBox>
-          <img src="./images/parking_icon.png" alt="parking" />
-          <span>주차가능</span>
-        </FacilityIconBox>
-        <FacilityIconBox>
-          <img src="./images/restaurant_icon.png" alt="parking" />
-          <span>조식당</span>
-        </FacilityIconBox>
-        <FacilityIconBox>
-          <img src="./images/wifi_icon.png" alt="parking" />
-          <span>무료 wifi</span>
-        </FacilityIconBox>
+        {facilities?.map((data, idx) => {
+          return <FacilitiesIconWrap key={idx} text={data} />;
+        })}
       </FacilityIconWrap>
     </FacilityWrap>
   );
@@ -49,11 +42,4 @@ const FacilityIconWrap = styled.article`
   grid-template-columns: repeat(auto-fill, minmax(20%, auto));
   justify-items: center;
   padding: 10px 50px;
-`;
-
-const FacilityIconBox = styled.div`
-  ${flexSet('inherit', 'inherit', 'column')};
-  text-align: center;
-  width: 70px;
-  font-size: 14px;
 `;
