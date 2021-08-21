@@ -1,19 +1,41 @@
 import React from 'react';
+import { useFetch } from '../../../hooks';
+import { RoomType } from './RoomType';
+
 import styled from 'styled-components';
-import { fontSet, boxSizeSet, border } from '../../../styles/Mixins';
+import { fontSet, boxSizeSet, border, flexSet } from '../../../styles/Mixins';
 
 export const DetailHotelRoom = () => {
+  // const [roomCategori, setRoomCategori] = useState([]);
+
+  // useEffect(() => {
+  // fetch(`${API_IP}/${params.id}`);       // 벨로그 작성 후 삭제예정
+  //   fetch()
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       setRoomCategori(res);
+  //     });
+  // }, []);
+
+  const [roomListData, loading] = useFetch('/data/ROOM_DATA.json');
+
   return (
-    <RoomChoiceWrap>
-      <RoomChoiceTitle>객실선택</RoomChoiceTitle>
-      <RoomImage src="./images/hotel_1.jpg" alt="hotel" />
-      <RoomReservation color="#74B9ff">
-        날짜 선택하고 객실 더보기
-      </RoomReservation>
-      <ChoiceInfo>
-        캘린더에서 날짜를 선택하시고 특가 객실을 확인하세요
-      </ChoiceInfo>
-    </RoomChoiceWrap>
+    !loading && (
+      <RoomChoiceWrap>
+        <RoomChoiceTitle>객실선택</RoomChoiceTitle>
+        <ChoiceDate>날짜</ChoiceDate>
+        <CostFilter>
+          <AvgCostFilter>1박 평균 가격</AvgCostFilter>
+          <TotalCostFilter>총 가격</TotalCostFilter>
+        </CostFilter>
+        {roomListData?.data?.map((list, idx) => {
+          return <RoomType key={idx} list={list} />;
+        })}
+        <RoomReservation color="#74B9ff">
+          날짜 선택하고 객실 더보기
+        </RoomReservation>
+      </RoomChoiceWrap>
+    )
   );
 };
 
@@ -28,9 +50,24 @@ const RoomChoiceTitle = styled.h2`
   padding-top: 10px;
 `;
 
-const RoomImage = styled.img`
-  ${boxSizeSet('100%', 'auto', '30px 0 0 0')}
+const ChoiceDate = styled.div`
+  ${flexSet('inherit', 'center')};
+  ${boxSizeSet('100%', '40px', '30px 0 10px', '0 16px')};
+  position: relative;
+  border-radius: 2px;
+  background-color: rgb(252, 247, 248);
 `;
+
+const CostFilter = styled.div`
+  width: 100%;
+  height: 50px;
+  background-color: #f8f8f9;
+  border-top: 1px solid #e7e7e7;
+`;
+
+const AvgCostFilter = styled.li``;
+
+const TotalCostFilter = styled.li``;
 
 const RoomReservation = styled.button`
   ${({ color }) => fontSet('inherit', color, 'inherit', '0')};
@@ -39,10 +76,4 @@ const RoomReservation = styled.button`
   text-align: center;
   background-color: white;
   cursor: pointer;
-`;
-
-const ChoiceInfo = styled.div`
-  ${fontSet('12px', 'rgb(77, 77, 77)')};
-  margin-top: 10px;
-  text-align: center;
 `;

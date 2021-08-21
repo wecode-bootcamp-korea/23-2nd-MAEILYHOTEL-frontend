@@ -1,0 +1,55 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "디럭스룸",
+      "image_url": "https://cdn.pixabay.com/photo/2020/02/18/16/14/bed-4859950_960_720.jpg",
+      "people": 2,
+      "option": [
+        {
+          "type": "숙박",
+          "check_in": "15:00:00",
+          "check_out": "11:00:00",
+          "price": {
+            "total": 1206400.0,
+            "avg": 109700.0
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "스위트룸",
+      "image_url": "https://cdn.pixabay.com/photo/2019/04/30/08/07/wardrobe-4167972_960_720.jpg",
+      "people": 2,
+      "option": [
+        {
+          "type": "숙박",
+          "check_in": "15:00:00",
+          "check_out": "12:00:00",
+          "price": {
+            "total": 2184000.0,
+            "avg": 198500.0
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "오션 패밀리 스위트룸",
+      "image_url": "https://cdn.pixabay.com/photo/2017/03/10/10/08/room-boy-2132349_960_720.jpg",
+      "people": 4,
+      "option": [
+        {
+          "type": "숙박",
+          "check_in": "15:00:00",
+          "check_out": "13:00:00",
+          "price": {
+            "total": 3536000.0,
+            "avg": 321500.0
+          }
+        }
+      ]
+    }
+  ]
+}
