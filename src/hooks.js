@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { KAKAO_LOGIN, REDIRECT_URI } from '../../config';
+import { KAKAO_LOGIN, REDIRECT_URI } from './config';
 
 export const useFetch = (url, methodOptions) => {
   const [responseData, setResponseData] = useState({});
