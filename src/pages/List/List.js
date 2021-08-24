@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useLocation, useHistory } from 'react-router';
+import { useFetch } from '../../hooks';
 
 import { HotelList } from './HotelList';
 
@@ -6,29 +8,35 @@ import styled from 'styled-components';
 import { flexSet } from '../../styles/Mixins';
 
 export const List = () => {
-  const [hotels, sethotels] = useState([]);
-  const [category, setcategory] = useState('');
+  const location = useLocation();
+  const history = useHistory();
 
-  //'/data/listMockdata.json'
-  useEffect(() => {
-    fetch(
-      'http://10.58.2.242:8000/stays?category=1&location=서귀포시&CheckIn=2021-08-30&CheckOut=2021-09-03'
-    )
-      .then(data => data.json())
-      .then(data => {
-        sethotels(data);
-      });
-  }, []);
-  console.log(hotels);
+  const [hotels, loading] = useFetch(
+    `http://10.58.2.242:8000/stays${location.search}`
+  );
+  let [path, query] = `/list${location.search}`.split('?');
+  const [stayLocation, checkIn, checkOut] = query.split('&');
+
+  const changeAllList = () => {
+    history.push(`${path}?${stayLocation}&${checkIn}&${checkOut}`);
+  };
+
+  const changeHotelList = () => {
+    const query = '&category=1';
+    history.push(`${path}?${stayLocation}&${checkIn}&${checkOut}&${query}`);
+  };
+
+  const changeMotelList = () => {
+    const query = `&category=2`;
+    history.push(`${path}?${stayLocation}&${checkIn}&${checkOut}&${query}`);
+  };
+
   return (
     <Body>
-      <Graybox>
-        <i class="fas fa-search" />
-      </Graybox>
       <Filter>
-        <Content>전체</Content>
-        <Content>호텔</Content>
-        <Content>모텔</Content>
+        <Content onClick={changeAllList}>전체</Content>
+        <Content onClick={changeHotelList}>호텔</Content>
+        <Content onClick={changeMotelList}>모텔</Content>
       </Filter>
       {/* <Count>결과 1020건</Count> */}
       {hotels.staylist &&
@@ -52,23 +60,11 @@ const Body = styled.div`
   margin: 0 auto;
 `;
 
-const Graybox = styled.div`
-  background-color: #f8f8f9;
-  width: 1150px;
-  height: 40px;
-  margin: 8px 12px;
-  position: relative;
-  i {
-    position: absolute;
-    top: 13px;
-    left: 10px;
-  }
-`;
-
 const Filter = styled.div`
   border-bottom: 1px solid #f1f1f1;
   ${flexSet('', 'center', 'row')}
   height: 39px;
+  margin-top: 70px;
 `;
 
 const Content = styled.button`
@@ -78,10 +74,4 @@ const Content = styled.button`
   background-color: white;
   cursor: pointer;
   border: none;
-`;
-
-const Count = styled.div`
-  font-size: 14px;
-  padding: 16px 16px 6px;
-  background-color: #f8f8f9;
 `;
