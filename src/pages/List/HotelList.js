@@ -1,31 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { theme } from '../../styles/theme';
 
-export const HotelList = ({
-  image,
-  name,
-  content,
-  percent,
-  price,
-  preprice,
-}) => {
+export const HotelList = ({ image, name, price, id }) => {
   const history = useHistory();
-  function handleClick() {
-    history.push('/detail');
-  }
+  const [hotelDetailId, setHotelDetailId] = useState('');
 
+  function handleClick() {
+    console.log(id);
+    history.push(`/detail/${id}`);
+  }
   return (
-    <Hotel>
+    <Hotel onClick={handleClick}>
       <Search>
         <img alt="rose" src={image} />
         <i class="far fa-heart" />
       </Search>
       <Info>
         <Name>{name}</Name>
-        <Summary>{content}</Summary>
+        {/* <Summary>{content}</Summary> */}
         <Price>
           <span>74%</span>
           <span>{price}</span>

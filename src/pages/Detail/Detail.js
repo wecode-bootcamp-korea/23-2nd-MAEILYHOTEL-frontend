@@ -1,49 +1,54 @@
 import React, { useState } from 'react';
 import { useFetch } from '../../hooks';
-import { useRouteMatch } from 'react-router-dom';
-
+import { useRouteMatch, useLocation } from 'react-router-dom';
+import { DETAIL_PAGE } from '../../config';
 import { DetailCommon } from '../../component/Detail/DetailCommon';
 import { DetailHotelTitle } from './DetailHotelTitle/DetailHotelTitle';
+import { DetailHotelReview } from './DetailHotelReview/DetailHotelReview';
 import { DetailHotelRoom } from './DetailHotelRoom/DetailHotelRoom';
 import { DetailHotelInfo } from './DetailHotelInfo/DetailHotelInfo';
 import { DetailHotelFacility } from './DetailHotelFacility/DetailHotelFacility';
 import { DetailHotelMap } from './DetailHotelMap/DetailHotelMap';
 import { MapModal } from './MapModal';
+import { ReviewModal } from './ReviewModal';
 import { Calendar } from '../../component/Calendar/Calendar';
 
 import styled from 'styled-components';
 import { fullScreen } from '../../styles/Mixins';
 
-import { DETAIL_PAGE } from '../../config';
-
 export const Detail = () => {
-  const [isModalHandle, setIsModalHandle] = useState(false);
+  const [isMapModalHandle, setIsMapModalHandle] = useState(false);
+  const [isReviewModalHandle, setIsReviewModalHandle] = useState(false);
   const [calendarOn, setCalendarOn] = useState(false);
   const [stayDate, setStayDate] = useState([]);
 
   const match = useRouteMatch();
-
+  const location = useLocation();
   const [hotelData, loading] = useFetch(
-    `${DETAIL_PAGE}/stays/${match.params.id}`
+    `${DETAIL_PAGE}/stays/${match.params.id}${location.search}`
   );
 
-  const modalActive = () => {
-    setIsModalHandle(!isModalHandle);
+  const mapModalActive = () => {
+    setIsMapModalHandle(!isMapModalHandle);
+  };
+
+  const reviewModalActive = () => {
+    setIsReviewModalHandle(!isReviewModalHandle);
   };
 
   const {
-    category,
-    name,
-    images,
-    cost,
-    total_rooms,
-    facilities,
     address,
-    lat,
-    long,
-    description,
+    category,
     check_in,
     check_out,
+    description,
+    facilities,
+    images,
+    lat,
+    long,
+    name,
+    reviews,
+    total_rooms,
   } = hotelData || {};
 
   return (
@@ -55,8 +60,11 @@ export const Detail = () => {
             check_in={check_in}
             check_out={check_out}
           >
-            <DetailHotelTitle category={category} name={name} cost={cost} />
-            {/* <Review>review</Review>     //리뷰 (추가 기능 구현 사항)*/}
+            <DetailHotelTitle category={category} name={name} />
+            <DetailHotelReview
+              reviewModalActive={reviewModalActive}
+              reviews={reviews}
+            />
             <DetailHotelRoom
               setCalendarOn={() => {
                 setCalendarOn(true);
@@ -68,14 +76,20 @@ export const Detail = () => {
               total_rooms={total_rooms}
               facilities={facilities}
             />
-            <DetailHotelMap modalActive={modalActive} address={address} />
+            <DetailHotelMap mapModalActive={mapModalActive} address={address} />
           </DetailCommon>
           <MapModal
-            isModalHandle={isModalHandle}
-            modalActive={modalActive}
+            isMapModalHandle={isMapModalHandle}
+            mapModalActive={mapModalActive}
             name={name}
             lat={lat}
             long={long}
+          />
+          <ReviewModal
+            isReviewModalHandle={isReviewModalHandle}
+            reviewModalActive={reviewModalActive}
+            setIsReviewModalHandle={setIsReviewModalHandle}
+            reviews={reviews}
           />
         </DetailSection>
         {calendarOn && (
@@ -104,4 +118,5 @@ const DetailSection = styled.section`
   ${fullScreen};
   display: flex;
   justify-content: center;
+  margin-top: 60px;
 `;

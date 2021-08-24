@@ -9,12 +9,18 @@ import {
 import styled from 'styled-components';
 import { boxSizeSet, flexSet, fontSet } from '../../styles/Mixins';
 
-export const MapModal = ({ isModalHandle, modalActive, name, lat, long }) => {
+export const MapModal = ({
+  isMapModalHandle,
+  mapModalActive,
+  name,
+  lat,
+  long,
+}) => {
   return (
-    isModalHandle && (
+    isMapModalHandle && (
       <MapModalSection>
         <MapModalHeader>
-          <MapExit className="fas fa-times" onClick={modalActive} />
+          <MapExit className="fas fa-times" onClick={mapModalActive} />
           <MapTitle>지도</MapTitle>
         </MapModalHeader>
         <MapContents>

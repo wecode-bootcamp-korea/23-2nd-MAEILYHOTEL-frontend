@@ -1,19 +1,28 @@
-[
-  {
-    "category": "호텔",
-    "name": "씨베이 강릉 호텔",
-    "images": [
-      "https://cdn.pixabay.com/photo/2015/09/28/21/32/the-palm-962785_960_720.jpg",
-      "https://cdn.pixabay.com/photo/2014/07/21/19/20/lobby-398845_960_720.jpg",
-      "https://cdn.pixabay.com/photo/2016/11/18/22/21/restaurant-1837150_960_720.jpg"
-    ],
-    "total_rooms": 50,
-    "facilities": ["주차가능", "조식당", "무료Wifi"],
-    "address": "강원도 강릉시 주문진읍 주문로 강릉 씨베이호텔",
-    "lat": "37.8893138",
-    "long": "128.8254243",
-    "description": "오션 뷰가 정말 아름다운 호텔입니다. 강릉 시내 5분거리!",
-    "check_in": "15:00:00",
-    "check_out": "11:00:00"
-  }
-]
+{
+  "category": "호텔",
+  "name": "씨베이 강릉 호텔",
+  "images": [
+    "https://cdn.pixabay.com/photo/2015/09/28/21/32/the-palm-962785_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2014/07/21/19/20/lobby-398845_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2016/11/18/22/21/restaurant-1837150_960_720.jpg"
+  ],
+  "total_rooms": 50,
+  "facilities": ["주차가능", "조식당", "무료Wifi"],
+  "address": "강원도 강릉시 주문진읍 주문로 강릉 씨베이호텔",
+  "lat": "37.8893138",
+  "long": "128.8254243",
+  "description": "오션 뷰가 정말 아름다운 호텔입니다. 강릉 시내 5분거리!",
+  "check_in": "15:00:00",
+  "check_out": "11:00:00",
+  "reviews": [
+    {
+      "id": 6,
+      "userId": "김동우",
+      "score": 3,
+      "description": "haha",
+      "image": [
+        "https://cdn.pixabay.com/photo/2016/11/18/22/21/restaurant-1837150_960_720.jpg"
+      ]
+    }
+  ]
+}

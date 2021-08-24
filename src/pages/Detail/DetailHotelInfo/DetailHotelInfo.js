@@ -7,7 +7,7 @@ export const DetailHotelInfo = ({ name, description }) => {
   return (
     <HotelInfoWrap>
       <InfoTitleWrap>
-        <InfoLogo src="./images/comment_logo.png" alt="logo" />
+        <InfoLogo src="/images/comment_logo.png" alt="logo" />
         <InfoTitle>매일리's comment</InfoTitle>
       </InfoTitleWrap>
       <InfoText>
