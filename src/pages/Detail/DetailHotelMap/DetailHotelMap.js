@@ -4,9 +4,9 @@ import { AddressBox } from './AddressBox';
 import styled from 'styled-components';
 import { boxSizeSet } from '../../../styles/Mixins';
 
-export const DetailHotelMap = ({ modalActive, address }) => {
+export const DetailHotelMap = ({ mapModalActive, address }) => {
   return (
-    <HotelMapWarp onClick={modalActive}>
+    <HotelMapWarp onClick={mapModalActive}>
       <HotelMapInner>
         <AddressBox address={address}>
           <HotelAddressIcon color="#74B9ff">
@@ -20,7 +20,7 @@ export const DetailHotelMap = ({ modalActive, address }) => {
 
 const HotelMapWarp = styled.div`
   ${boxSizeSet('inherit', '150px', '30px 0 0 0', '10px')};
-  background-image: url('./images/map_background.jpg');
+  background-image: url('/images/map_background.jpg');
   background-size: cover;
 `;
 

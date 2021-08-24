@@ -1,0 +1,62 @@
+{
+  "AvgScore": 3.58,
+  "data": [
+    {
+      "id": 3,
+      "userId": "김동우",
+      "score": 4.5,
+      "description": "good",
+      "image": [
+        "https://cdn.pixabay.com/photo/2016/11/18/22/21/restaurant-1837150_960_720.jpg"
+      ],
+      "created_date": "2021-08-24",
+      "room": "디럭스룸"
+    },
+    {
+      "id": 4,
+      "userId": "김동우",
+      "score": 3.0,
+      "description": "haha",
+      "image": [
+        "https://cdn.pixabay.com/photo/2016/11/18/22/21/restaurant-1837150_960_720.jpg"
+      ],
+      "created_date": "2021-08-24",
+      "room": "디럭스룸"
+    },
+    {
+      "id": 5,
+      "userId": "김동우",
+      "score": 3.0,
+      "description": null,
+      "image": [
+        "https://cdn.pixabay.com/photo/2016/11/18/22/21/restaurant-1837150_960_720.jpg"
+      ],
+      "created_date": "2021-08-24",
+      "room": "디럭스룸"
+    },
+    {
+      "id": 6,
+      "userId": "김동우",
+      "score": 3.0,
+      "description": "haha",
+      "image": [
+        "https://cdn.pixabay.com/photo/2016/11/18/22/21/restaurant-1837150_960_720.jpg",
+        "https://cdn.pixabay.com/photo/2016/11/18/22/21/restaurant-1837150_960_720.jpg"
+      ],
+      "created_date": "2021-08-24",
+      "room": "디럭스룸"
+    },
+    {
+      "id": 7,
+      "userId": "김동우",
+      "score": 3.0,
+      "description": "너무 좋아요! 시설 굿 짱짱!!!",
+      "image": [
+        "https://cdn.pixabay.com/photo/2016/11/18/22/21/restaurant-1837150_960_720.jpg",
+        "https://cdn.pixabay.com/photo/2016/11/18/22/21/restaurant-1837150_960_720.jpg"
+      ],
+      "created_date": "2021-08-24",
+      "room": "디럭스룸"
+    }
+  ]
+}

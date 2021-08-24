@@ -50,7 +50,6 @@ export const RoomType = ({ list, isFilterHandle }) => {
 const RoomTypeWrap = styled.section`
   ${flexSet('flex-start', 'center', 'row')};
   border-bottom: 10px solid #f8f8f9;
-  cursor: pointer;
 `;
 
 const RoomImg = styled.img`

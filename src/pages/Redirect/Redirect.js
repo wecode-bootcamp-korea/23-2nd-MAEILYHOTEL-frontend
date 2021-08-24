@@ -13,6 +13,7 @@ export const Redirect = () => {
 
   useEffect(() => {
     if (!loading && !errorText) {
+      localStorage.setItem(USER_INFO, userInfo.token);
       history.push('/');
     } else if (loading && errorText) {
       alert('죄송합니다. 현재 서버가 불안정하니 잠시 후에 다시 시도해주세요.');
@@ -26,6 +27,8 @@ export const Redirect = () => {
     </Section>
   );
 };
+
+export const USER_INFO = 'login_token';
 
 const BingleBingle = keyframes`
 from {

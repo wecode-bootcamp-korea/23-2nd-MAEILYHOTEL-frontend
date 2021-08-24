@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from 'react';
+
 import { HotelList } from './HotelList';
-import { useHistory } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { flexSet } from '../../styles/Mixins';
 
 export const List = () => {
   const [hotels, sethotels] = useState([]);
-  const history = useHistory();
-  function handleClick() {
-    history.push('/detail');
-  }
+  const [category, setcategory] = useState('');
 
+  //'/data/listMockdata.json'
   useEffect(() => {
-    fetch('/data/listMockdata.json')
-      .then(res => res.json())
+    fetch(
+      'http://10.58.2.242:8000/stays?category=1&location=서귀포시&CheckIn=2021-08-30&CheckOut=2021-09-03'
+    )
+      .then(data => data.json())
       .then(data => {
         sethotels(data);
       });
   }, []);
-
+  console.log(hotels);
   return (
     <Body>
       <Graybox>
@@ -28,22 +28,21 @@ export const List = () => {
       <Filter>
         <Content>전체</Content>
         <Content>호텔</Content>
-        <Content>부띠끄/모텔</Content>
+        <Content>모텔</Content>
       </Filter>
       {/* <Count>결과 1020건</Count> */}
-      {hotels.map(({ id, name, content, image, price, percent, preprice }) => {
-        return (
-          <HotelList
-            key={id}
-            name={name}
-            content={content}
-            image={image}
-            price={price}
-            percent={percent}
-            preprice={preprice}
-          />
-        );
-      })}
+      {hotels.staylist &&
+        hotels.staylist.map(({ id, name, image_url, price, idx }) => {
+          return (
+            <HotelList
+              key={id}
+              name={name}
+              image={image_url}
+              price={price}
+              id={id}
+            />
+          );
+        })}
     </Body>
   );
 };

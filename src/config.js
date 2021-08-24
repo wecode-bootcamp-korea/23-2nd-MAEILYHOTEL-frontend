@@ -1,4 +1,4 @@
-const API_IP = 'http://10.58.2.242:8000';
+const API_IP = 'http://10.58.3.142:8000';
 
 export const REDIRECT_URI = 'http://localhost:3000/users/kakao';
 
@@ -7,7 +7,6 @@ export const KAKAO_OAUTH = `https://kauth.kakao.com/oauth/authorize?client_id=${
 export const KAKAO_LOGIN = `${API_IP}/users/kakao`;
 
 export const DETAIL_PAGE = `${API_IP}`;
-
 export const GRADE = `${API_IP}/users/level`;
 
 export const PROFILE_API = `${API_IP}/users/profile`;
