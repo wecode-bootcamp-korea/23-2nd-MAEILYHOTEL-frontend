@@ -31,16 +31,6 @@ export const List = () => {
     history.push(`${path}?${stayLocation}&${checkIn}&${checkOut}&${query}`);
   };
 
-  useEffect(() => {
-    fetch(
-      'http://10.58.2.242:8000/stays?category=1&location=서귀포시&CheckIn=2021-08-30&CheckOut=2021-09-03'
-    )
-      .then(data => data.json())
-      .then(data => {
-        sethotels(data);
-      });
-  }, []);
-
   return (
     <Body>
       <Filter>
@@ -48,7 +38,6 @@ export const List = () => {
         <Content onClick={changeHotelList}>호텔</Content>
         <Content onClick={changeMotelList}>모텔</Content>
       </Filter>
-      {/* <Count>결과 1020건</Count> */}
       {hotels.staylist &&
         hotels.staylist.map(({ id, name, image_url, price, idx }) => {
           return (

@@ -13,7 +13,7 @@ export const DetailHotelRoom = ({ setCalendarOn }) => {
   const pathName = useLocation().pathname;
   const query = useLocation().search;
   const [roomListData, listLoading] = useFetch(
-    `${DETAIL_PAGE}${pathName}${query}`
+    `${DETAIL_PAGE}${pathName}/rooms?${query}`
   );
 
   const avgButton = () => {
