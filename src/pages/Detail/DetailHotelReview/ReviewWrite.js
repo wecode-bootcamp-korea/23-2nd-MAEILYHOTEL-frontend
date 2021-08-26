@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useRouteMatch, useHistory } from 'react-router-dom';
+import { useRouteMatch, useHistory, useLocation } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -9,6 +9,7 @@ export const ReviewWrite = ({ setIsReviewModalHandle, reviewModalActive }) => {
   const [imgFile, setImgFile] = useState(null);
   const match = useRouteMatch();
   const history = useHistory();
+  const location = useLocation();
 
   const uploadReview = e => {
     setReviewText(e.target.value);
@@ -47,7 +48,7 @@ export const ReviewWrite = ({ setIsReviewModalHandle, reviewModalActive }) => {
       .catch(error => console.log('error', error))
       .then(res => {
         alert('소중한 리뷰 감사합니다');
-        history.push(`/detail/${match.params.id}`);
+        history.push(`/detail/${match.params.id}?${location.search}`);
         setIsReviewModalHandle(!reviewModalActive);
       });
   };

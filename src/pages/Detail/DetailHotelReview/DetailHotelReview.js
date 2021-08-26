@@ -1,32 +1,33 @@
 import React from 'react';
-// import { useFetch } from '../../../hooks';
 import { ReviewForm } from './ReviewForm';
 
 import styled from 'styled-components';
 import { fontSet, boxSizeSet, border } from '../../../styles/Mixins';
 
 export const DetailHotelReview = ({ reviewModalActive, reviews }) => {
-  // const [hotelReview, loading, error] = useFetch('/data/HOTEL_REVIEW.json');
-
-  return (
-    reviews[0] && (
-      <Review>
-        <div>
-          <TrueReviewTitle>트루리뷰</TrueReviewTitle>
-          <TrueReviewIcon className="far fa-thumbs-up" />
-          <ReviewRate>80%</ReviewRate>
-        </div>
-        <ReviewForm
-          score={reviews[0].score}
-          userId={reviews[0].userId}
-          description={reviews[0].description}
-          userImage={reviews[0].image}
-        />
-        <MoreReviewBtn color="#74B9ff" onClick={reviewModalActive}>
-          리뷰 더보기
-        </MoreReviewBtn>
-      </Review>
-    )
+  return reviews[0] === null ? (
+    <Review>
+      <MoreReviewBtn color="#74B9ff" onClick={reviewModalActive}>
+        리뷰 더보기
+      </MoreReviewBtn>
+    </Review>
+  ) : (
+    <Review>
+      <div>
+        <TrueReviewTitle>트루리뷰</TrueReviewTitle>
+        <TrueReviewIcon className="far fa-thumbs-up" />
+        <ReviewRate>80%</ReviewRate>
+      </div>
+      <ReviewForm
+        score={reviews[0].score}
+        userId={reviews[0].userId}
+        description={reviews[0].description}
+        userImage={reviews[0].image}
+      />
+      <MoreReviewBtn color="#74B9ff" onClick={reviewModalActive}>
+        리뷰 더보기
+      </MoreReviewBtn>
+    </Review>
   );
 };
 

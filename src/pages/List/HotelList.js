@@ -10,7 +10,7 @@ export const HotelList = ({ image, name, price, id }) => {
 
   function handleClick() {
     console.log(id);
-    history.push(`/detail/${id}`);
+    history.push(`/stays/${id}`);
   }
   return (
     <Hotel onClick={handleClick}>
