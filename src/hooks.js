@@ -34,10 +34,6 @@ export const useFetch = (
   return [responseData, loading, error];
 };
 
-export const LOGIN_TOKEN = 'login_token';
-
-export const USER_INFO = 'user_info';
-
 export const useKakaoLogin = codeData => {
   const [backEndToken, setUserInfo] = useState('');
   const [loading, setLoading] = useState(true);

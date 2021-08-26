@@ -37,12 +37,9 @@ export const ReviewModal = ({
     }
   }, [reservationUser]);
 
-  console.log('예약확인', reserveCheck);
-  console.log('호텔리뷰', hotelReview);
-
   const [isReviewBoxActive, setIsReviewBoxActive] = useState(false);
 
-  const topUserId = reviews[0].userId && idMasking(reviews[0].userId);
+  const topUserId = reviews[0] && idMasking(reviews[0].userId);
 
   return (
     isReviewModalHandle && (
@@ -51,21 +48,19 @@ export const ReviewModal = ({
           <ReviewExit className="fas fa-times" onClick={reviewModalActive} />
           <ReviewTitle>트루리뷰</ReviewTitle>
         </ReviewModalHeader>
-        <TopReviewWrap>
-          <TopTitleReview>대표 트루리뷰</TopTitleReview>
-          <TopReviewBox>
-            <ReviewForm
-              userId={topUserId}
-              score={reviews[0].score}
-              description={reviews[0].description}
-              userImage={reviews[0].image}
-            />
-          </TopReviewBox>
-        </TopReviewWrap>
-        <ReviewWrite
-          reviewModalActive={reviewModalActive}
-          setIsReviewModalHandle={setIsReviewModalHandle}
-        />
+        {reviews[0] === null ? null : (
+          <TopReviewWrap>
+            <TopTitleReview>대표 트루리뷰</TopTitleReview>
+            <TopReviewBox>
+              <ReviewForm
+                userId={topUserId}
+                score={reviews[0].score}
+                description={reviews[0].description}
+                userImage={reviews[0].image}
+              />
+            </TopReviewBox>
+          </TopReviewWrap>
+        )}
         {isReviewBoxActive ? (
           <ReviewWrite
             reviewModalActive={reviewModalActive}

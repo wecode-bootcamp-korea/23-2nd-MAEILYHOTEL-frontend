@@ -14,3 +14,5 @@ export const DETAIL_PAGE = `${API_IP}`;
 export const GRADE = `${API_IP}/users/level`;
 
 export const PROFILE_API = `${API_IP}/users/profile`;
+
+export const BOOK_API = `${API_IP}/books`;

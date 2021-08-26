@@ -31,6 +31,16 @@ export const List = () => {
     history.push(`${path}?${stayLocation}&${checkIn}&${checkOut}&${query}`);
   };
 
+  useEffect(() => {
+    fetch(
+      'http://10.58.2.242:8000/stays?category=1&location=서귀포시&CheckIn=2021-08-30&CheckOut=2021-09-03'
+    )
+      .then(data => data.json())
+      .then(data => {
+        sethotels(data);
+      });
+  }, []);
+
   return (
     <Body>
       <Filter>
