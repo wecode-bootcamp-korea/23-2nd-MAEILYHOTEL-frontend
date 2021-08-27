@@ -17,7 +17,7 @@ class Routes extends React.Component {
           {/* <Redirect from="/users/kakao" to="/" /> */}
           <Route exact path="/" component={Main} />
           <Route exact path="/list" component={List} />
-          <Route exact path="/detail/:id" component={Detail} />
+          <Route exact path="/stays/:id" component={Detail} />
           <Route exact path="/users/kakao" component={Redirect} />
           <Route exact path="/list" component={List} />
           <Route exact path="/stays/:id/rooms" component={Detail} />
