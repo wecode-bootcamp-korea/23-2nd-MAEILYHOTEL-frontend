@@ -17,8 +17,6 @@ export const NavModal = ({ handleModal }) => {
   const [toggle, setToggle] = useState(false);
   const [grade, setGrade] = useState('');
 
-  console.log(grade, agreement, toggle, userlevel, userProfile);
-
   const onOff = () => {
     setToggle(!toggle);
     gradeRequest();

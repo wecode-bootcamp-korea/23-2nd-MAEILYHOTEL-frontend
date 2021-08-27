@@ -48,8 +48,6 @@ export const Calendar = ({
     setExcludeDays(excludeDays);
   };
 
-  console.log(bookInfo);
-
   const renderDayContents = (day, date = {}) => {
     const tooltipText = `Tooltip for date: ${date}`;
     return (

@@ -17,7 +17,6 @@ export const postFetch = (url = '', headers = {}, body = {}) => {
         body: postCallBody,
       });
       const postRes = await postCall.json();
-      console.log(postRes.message);
 
       return postRes.message;
     } catch (e) {
@@ -25,7 +24,6 @@ export const postFetch = (url = '', headers = {}, body = {}) => {
       return result;
     }
   };
-  console.log('test');
   if (post() === 'SUCCESS') {
     return 'test';
   }

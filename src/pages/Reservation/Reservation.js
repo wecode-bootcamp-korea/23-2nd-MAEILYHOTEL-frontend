@@ -12,15 +12,6 @@ export const Reservation = () => {
   const headers = { Authorization: token };
   const [hotels, loading] = useFetch(`${BOOK_API}`, { headers });
 
-  console.log(hotels);
-  // useEffect(() => {
-  //   fetch()
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       sethotels(data);
-  //     });
-  // }, []);
-
   return (
     !loading && (
       <Body>
