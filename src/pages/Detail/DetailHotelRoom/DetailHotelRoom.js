@@ -7,14 +7,14 @@ import styled from 'styled-components';
 import { fontSet, boxSizeSet, border, flexSet } from '../../../styles/Mixins';
 import { DETAIL_PAGE } from '../../../config';
 
-export const DetailHotelRoom = ({ setCalendarOn }) => {
+export const DetailHotelRoom = ({
+  setCalendarOn,
+  roomListData,
+  pathName,
+  query,
+  listLoading,
+}) => {
   const [isFilterHandle, setIsFilterHandle] = useState(true);
-
-  const pathName = useLocation().pathname;
-  const query = useLocation().search;
-  const [roomListData, listLoading] = useFetch(
-    `${DETAIL_PAGE}${pathName}/rooms?${query}`
-  );
 
   const avgButton = () => {
     setIsFilterHandle(false);

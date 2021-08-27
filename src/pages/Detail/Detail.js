@@ -27,13 +27,16 @@ export const Detail = () => {
   let [path, query] = `/list${location.search}`.split('?');
   const [stayLocation, checkIn, checkOut] = query.split('&');
 
-  console.log(stayLocation, '>>>>>>>>>>>>', checkIn, '>>>>>>>>>>>>', checkOut);
+  const pathName = useLocation().pathname;
+  const queryData = useLocation().search;
 
   const [hotelData, loading] = useFetch(
     `${DETAIL_PAGE}/stays/${match.params.id}?${checkIn}&${checkOut}`
   );
 
-  console.log(query);
+  const [roomListData, listLoading] = useFetch(
+    `${DETAIL_PAGE}${pathName}/rooms${queryData}`
+  );
 
   const mapModalActive = () => {
     setIsMapModalHandle(!isMapModalHandle);
@@ -76,6 +79,10 @@ export const Detail = () => {
               setCalendarOn={() => {
                 setCalendarOn(true);
               }}
+              roomListData={roomListData}
+              pathName={pathName}
+              query={queryData}
+              listLoading={listLoading}
             />
             <DetailHotelInfo name={name} description={description} />
             <DetailHotelFacility
@@ -96,6 +103,7 @@ export const Detail = () => {
             reviewModalActive={reviewModalActive}
             setIsReviewModalHandle={setIsReviewModalHandle}
             reviews={reviews}
+            roomListData={roomListData}
           />
         </DetailSection>
         {calendarOn && (
