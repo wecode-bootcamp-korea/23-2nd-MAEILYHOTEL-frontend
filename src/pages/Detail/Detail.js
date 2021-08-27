@@ -25,11 +25,15 @@ export const Detail = () => {
   const match = useRouteMatch();
   const location = useLocation();
   let [path, query] = `/list${location.search}`.split('?');
-  const [checkIn, checkOut] = query.split('&');
+  const [stayLocation, checkIn, checkOut] = query.split('&');
+
+  console.log(stayLocation, '>>>>>>>>>>>>', checkIn, '>>>>>>>>>>>>', checkOut);
 
   const [hotelData, loading] = useFetch(
     `${DETAIL_PAGE}/stays/${match.params.id}?${checkIn}&${checkOut}`
   );
+
+  console.log(query);
 
   const mapModalActive = () => {
     setIsMapModalHandle(!isMapModalHandle);
@@ -107,8 +111,8 @@ export const Detail = () => {
                 ? `${stayDate[0]} ~ ${stayDate[1]} 예약하기`
                 : '날짜를 선택해주세요'
             }
-            linkUrl={`/stays/${match.params.id}/rooms?CheckIn=${stayDate[0]}&CheckOut=${stayDate[1]}`}
-            redirectComponent={`/stays/${match.params.id}/rooms?CheckIn=${stayDate[0]}&CheckOut=${stayDate[1]}`}
+            linkUrl={`/stays/${match.params.id}?${stayLocation}&CheckIn=${stayDate[0]}&CheckOut=${stayDate[1]}`}
+            redirectComponent={`/stays/${match.params.id}?${stayLocation}&CheckIn=${stayDate[0]}&CheckOut=${stayDate[1]}`}
           />
         )}
       </>

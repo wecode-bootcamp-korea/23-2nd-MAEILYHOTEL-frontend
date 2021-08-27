@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useHistory } from 'react-router';
 import { BookInfo } from './BookInfo';
@@ -6,10 +6,10 @@ import { PointWrap } from './PointWrap';
 
 import { useProfile } from '../../../hooks';
 import { BOOK_API, LOGIN_TOKEN } from '../../../config';
-import { postFetch, queryGenerator } from '../../../utils';
+import { queryGenerator } from '../../../utils';
 
 import styled from 'styled-components';
-import { flexSet, fullScreen } from '../../../styles/Mixins';
+import { flexSet } from '../../../styles/Mixins';
 
 const bookOrNot = (
   id = 0,
@@ -17,20 +17,31 @@ const bookOrNot = (
   date = [],
   total = 0,
   discount = 0,
-  headers = {}
+  headers = {},
+  setBookResult
 ) => {
-  const postResult = postFetch(BOOK_API, headers, {
-    Room: id,
-    RoomOption: type,
-    CheckIn: date[0],
-    CheckOut: date[1],
-    Price: total - total * discount,
-  });
-
-  return postResult;
+  fetch(BOOK_API, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      Room: id,
+      RoomOption: type,
+      CheckIn: date[1],
+      CheckOut: date[2],
+      Price: total - total * discount,
+    }),
+  })
+    .then(res => res.json())
+    .then(res => {
+      if (res.message === 'SUCCESS') {
+        setBookResult(true);
+      }
+    });
 };
 
 export const CreditWrapper = ({ roomData }) => {
+  const [bookResult, setBookResult] = useState(false);
+
   const history = useHistory();
   const { id, query, type, check_in, check_out, total } = roomData;
 
@@ -40,6 +51,12 @@ export const CreditWrapper = ({ roomData }) => {
   const headers = { Authorization: localStorage.getItem(LOGIN_TOKEN) };
 
   const date = queryGenerator(query);
+
+  useEffect(() => {
+    if (bookResult) {
+      history.push('/reservation');
+    }
+  }, [bookResult]);
 
   return (
     !profileLoading && (
@@ -62,17 +79,7 @@ export const CreditWrapper = ({ roomData }) => {
         <PointWrap point={point} total={total} discount={discount} />
         <BookButton
           onClick={() => {
-            const creditOk = bookOrNot(
-              id,
-              type,
-              date,
-              total,
-              discount,
-              headers
-            );
-            if (creditOk) {
-              history.push('/');
-            }
+            bookOrNot(id, type, date, total, discount, headers, setBookResult);
           }}
         >
           예약

@@ -8,6 +8,8 @@ export const NextLink = ({ linkInfo, dateRange, setCalendarOff }) => {
   const [path, query] = linkUrl.split('?');
   const [redirectPath, redirectQuery] = redirectComponent.split('?');
 
+  console.log(linkUrl.split('?'), redirectComponent.split('?'));
+
   return (
     <StyledLink
       to={{

@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import styled from 'styled-components';
+import { useProfile } from '../../hooks';
 import { theme } from '../../styles/theme';
 
 export const HotelList = ({ image, name, price, id }) => {
@@ -11,6 +12,10 @@ export const HotelList = ({ image, name, price, id }) => {
   function handleClick() {
     history.push(`/stays/${id}${location.search}`);
   }
+
+  const [profile, profileLoading] = useProfile();
+
+  const { discount } = profile;
   return (
     <Hotel onClick={handleClick}>
       <Search>
@@ -21,9 +26,9 @@ export const HotelList = ({ image, name, price, id }) => {
         <Name>{name}</Name>
         {/* <Summary>{content}</Summary> */}
         <Price>
-          <span>74%</span>
-          <span>{price}</span>
-          <span>27500원</span>
+          <span>{discount * 100}%</span>
+          <span>{' ₩ ' + (price - price * discount)}</span>
+          <span>{' ₩ ' + price}</span>
         </Price>
       </Info>
     </Hotel>

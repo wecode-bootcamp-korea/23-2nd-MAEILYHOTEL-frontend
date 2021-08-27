@@ -7,6 +7,7 @@ import { List } from './pages/List/List';
 import { Main } from './pages/Main/Main';
 import { Redirect } from './pages/Redirect/Redirect';
 import { Credit } from './pages/Credit/Credit';
+import { Reservation } from './pages/Reservation/Reservation';
 
 class Routes extends React.Component {
   render() {
@@ -23,6 +24,7 @@ class Routes extends React.Component {
           <Route exact path="/stays/:id/rooms" component={Detail} />
           <Route exact path="/credit" component={Credit} />
           <Route exact path="/detail/:id" component={Detail} />
+          <Route exact path="/reservation" component={Reservation} />
         </Switch>
       </Router>
     );

@@ -3,6 +3,7 @@ import { useLocation, useHistory } from 'react-router';
 import { useFetch } from '../../hooks';
 
 import { HotelList } from './HotelList';
+import { LIST_API } from '../../config';
 
 import styled from 'styled-components';
 import { flexSet } from '../../styles/Mixins';
@@ -11,9 +12,7 @@ export const List = () => {
   const location = useLocation();
   const history = useHistory();
 
-  const [hotels, loading] = useFetch(
-    `http://10.58.2.242:8000/stays${location.search}`
-  );
+  const [hotels, loading] = useFetch(`${LIST_API}${location.search}`);
   let [path, query] = `/list${location.search}`.split('?');
   const [stayLocation, checkIn, checkOut] = query.split('&');
 
