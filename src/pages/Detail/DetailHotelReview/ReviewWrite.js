@@ -3,7 +3,11 @@ import { useRouteMatch, useHistory, useLocation } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-export const ReviewWrite = ({ setIsReviewModalHandle, reviewModalActive }) => {
+export const ReviewWrite = ({
+  setIsReviewModalHandle,
+  reviewModalActive,
+  reviewRoomId,
+}) => {
   const [reviewText, setReviewText] = useState('');
   const [imgBase64, setImgBase64] = useState('');
   const [imgFile, setImgFile] = useState(null);
@@ -32,7 +36,7 @@ export const ReviewWrite = ({ setIsReviewModalHandle, reviewModalActive }) => {
 
   const handelFileUpload = () => {
     const formData = new FormData();
-    formData.append('room_id', `${match.params.id}`);
+    formData.append('room_id', `${reviewRoomId}`);
     formData.append('rating', 5);
     formData.append('comment', reviewText);
     formData.append('image', imgFile);

@@ -26,5 +26,7 @@ export const postFetch = (url = '', headers = {}, body = {}) => {
       return '';
     }
   };
-  return post();
+  if (post() === 'SUCCESS') {
+    return 'test';
+  }
 };

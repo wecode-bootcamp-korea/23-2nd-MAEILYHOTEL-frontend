@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router';
+import { useLocation, useHistory } from 'react-router';
 import { useProfile } from '../../hooks';
 import { IconsWrapper } from './IconsWrapper';
 import { LoginButton } from './LoginButton';
@@ -10,15 +10,20 @@ import { flexSet, fullScreen } from '../../styles/Mixins';
 export const Nav = () => {
   const [modalOn, setModalOn] = useState(false);
   const location = useLocation();
+  const history = useHistory();
 
   const [userProfile, loading] = useProfile(location.pathname);
 
   const { point, name } = userProfile;
 
+  const goToMain = () => {
+    history.push('/');
+  };
+
   return (
     <NavContainer>
       <NavWrap>
-        <NavLogo alt="Logo" src="/images/logo.png" />
+        <NavLogo alt="Logo" src="/images/logo.png" onClick={goToMain} />
         {userProfile && !loading && (
           <NavIconWrap>
             {!(name && point) && <LoginButton />}
