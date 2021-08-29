@@ -1,6 +1,6 @@
 ## MAEILYHOTEL 프로젝트 Front-end/Back-end 소개
 
-- 신개념 밀키트 판매 사이트 [DAILYHOTEL](https://www.dailyhotel.com/) 클론 프로젝트
+- 숙소예약 플랫폼 사이트 [DAILYHOTEL](https://www.dailyhotel.com/) 클론 프로젝트
 - 짧은 프로젝트 기간동안 개발에 집중해야 하므로 페이지를 선택해 구현했습니다.
 - 개발은 초기 세팅부터 전부 직접 구현했으며, 아래 데모 영상에서 보이는 부분은 모두 백앤드와 연결하여 실제 사용할 수 있는 서비스 수준으로 개발한 것입니다.
 
@@ -23,7 +23,7 @@ _유투브 영상 링크나 캡쳐 이미지 넣어주세요._
 
 ### 적용 기술
 
-> - Front-End : React.js, sass
+> - Front-End : React.js, styled-component, slick, react-datePicker, googleMap
 > - Back-End : Python, Django web framework, Bcrypt, My SQL, Docker, S3, boto3
 > - Common : KAKAO social login, RESTful API, AWS(RDS/EC2)
 
