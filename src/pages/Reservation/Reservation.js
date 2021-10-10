@@ -1,34 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ReservationList } from './ReservationList';
 import { useHistory } from 'react-router-dom';
+import { useFetch } from '../../hooks';
 
 import styled from 'styled-components';
 import { flexSet } from '../../styles/Mixins';
+import { BOOK_API, LOGIN_TOKEN } from '../../config';
 
 export const Reservation = () => {
-  const [hotels, sethotels] = useState([]);
-  const history = useHistory();
+  const token = localStorage.getItem(LOGIN_TOKEN);
+  const headers = { Authorization: token };
+  const [hotels, loading] = useFetch(`${BOOK_API}`, { headers });
 
   return (
-    <Body>
-      <Graybox>
-        <i class="fas fa-search" />
-      </Graybox>
-      <Filter>
-        <Content>예약 리스트</Content>
-      </Filter>
-      {hotels.map(({ id, name, image, price, key }) => {
-        return (
-          <ReservationList
-            key={id}
-            name={name}
-            image={image}
-            price={price}
-            id={id}
-          />
-        );
-      })}
-    </Body>
+    !loading && (
+      <Body>
+        <Graybox>
+          <i class="fas fa-search" />
+        </Graybox>
+        <Filter>
+          <Content>예약 리스트</Content>
+        </Filter>
+        {hotels.data.map(({ ...rest }, idx) => {
+          return <ReservationList key={idx} {...rest} />;
+        })}
+      </Body>
+    )
   );
 };
 

@@ -16,11 +16,15 @@
 
 ### 데모 영상(이미지 클릭)
 
-_https://www.youtube.com/watch?v=qDQXFb2oayE
+
+_유투브 영상 링크나 캡쳐 이미지 넣어주세요._
+<br>
+https://www.youtube.com/watch?v=qDQXFb2oayE
 
 ## 적용 기술 및 구현 기능
 
 ### 적용 기술
+
 
 > - Front-End : React.js, styled-component, slick, react-datePicker, googleMap
 > - Back-End : Python, Django web framework, Bcrypt, My SQL, Docker, S3, boto3

@@ -24,21 +24,19 @@ export const Nav = () => {
     <NavContainer>
       <NavWrap>
         <NavLogo alt="Logo" src="/images/logo.png" onClick={goToMain} />
-        {userProfile && !loading && (
-          <NavIconWrap>
-            {!(name && point) && <LoginButton />}
-            <IconsWrapper
-              modal={modalOn}
-              modalOn={() => {
-                setModalOn(true);
-              }}
-              modalOff={() => {
-                setModalOn(false);
-              }}
-              userInfo={userProfile}
-            />
-          </NavIconWrap>
-        )}
+        <NavIconWrap>
+          {!(name && point) && <LoginButton />}
+          <IconsWrapper
+            modal={modalOn}
+            modalOn={() => {
+              setModalOn(true);
+            }}
+            modalOff={() => {
+              setModalOn(false);
+            }}
+            userInfo={userProfile}
+          />
+        </NavIconWrap>
       </NavWrap>
     </NavContainer>
   );
@@ -59,6 +57,7 @@ const NavIconWrap = styled.div`
 const NavLogo = styled.img`
   width: 200px;
   height: 33px;
+  cursor: pointer;
 `;
 
 const NavWrap = styled.div`

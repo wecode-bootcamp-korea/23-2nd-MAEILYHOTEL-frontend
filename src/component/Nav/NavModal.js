@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router';
+
 import { GRADE, LOGIN_TOKEN } from '../../config';
+import { useProfile } from '../../hooks';
 
 import styled from 'styled-components';
-import { useProfile } from '../../hooks';
-import { useLocation } from 'react-router';
 
 export const NavModal = ({ handleModal }) => {
   const token = localStorage.getItem(LOGIN_TOKEN);
@@ -47,29 +49,29 @@ export const NavModal = ({ handleModal }) => {
   }, [loading]);
 
   return (
-    !loading && (
-      <Modal>
-        <Name>
-          {name ? `${name}님` : '로그인 해주세요.'}
-          {grade && <Grade>{grade === 'silver' ? 'SILVER' : 'GOLD'}</Grade>}
-          <br />
-          {point && (
-            <Point>잔여 포인트 : ₩ {Math.floor(point).toLocaleString()}</Point>
-          )}
-          <Xmark>
-            <i className="fas fa-times" onClick={handleModal}></i>
-          </Xmark>
-          <Button>내 정보 수정</Button>
-          <Icon>
-            <i className="far fa-handshake">약관동의</i>
-            {name && <Toggle onClick={onOff}>{toggle ? 'OFF' : 'ON'}</Toggle>}
+    <Modal>
+      <Name>
+        {name ? `${name}님` : '로그인 해주세요.'}
+        {grade && <Grade>{grade === 'silver' ? 'SILVER' : 'GOLD'}</Grade>}
+        <br />
+        {point && (
+          <Point>잔여 포인트 : ₩ {Math.floor(point).toLocaleString()}</Point>
+        )}
+        <Xmark>
+          <i className="fas fa-times" onClick={handleModal}></i>
+        </Xmark>
+        <Button>내 정보 수정</Button>
+        <Icon>
+          <i className="far fa-handshake">약관동의</i>
+          {name && <Toggle onClick={onOff}>{toggle ? 'OFF' : 'ON'}</Toggle>}
+          <Link to="/reservation" className="Link">
             <i className="far fa-file-alt">예약 / 구매내역</i>
-            <i className="far fa-heart">위시리스트</i>
-            <i className="far fa-user">마이매일리</i>
-          </Icon>
-        </Name>
-      </Modal>
-    )
+          </Link>
+          <i className="far fa-heart">위시리스트</i>
+          <i className="far fa-user">마이매일리</i>
+        </Icon>
+      </Name>
+    </Modal>
   );
 };
 
@@ -92,9 +94,9 @@ const Name = styled.div`
 `;
 
 const Xmark = styled.div`
-  position: relative;
-  left: 280px;
-  bottom: 20px;
+  position: absolute;
+  left: 285px;
+  top: 10px;
   margin: 0px;
   color: ${({ theme }) => theme.colors.gray_3};
 `;
@@ -120,8 +122,14 @@ const Icon = styled.div`
     color: black;
     margin-bottom: 10px;
     display: block;
-    margin: 22px 0px;
+    margin: 22px 5px;
     font-size: 15px;
+    letter-spacing: 0.25rem;
+  }
+
+  .Link {
+    text-decoration: none;
+    outline: none;
   }
 `;
 

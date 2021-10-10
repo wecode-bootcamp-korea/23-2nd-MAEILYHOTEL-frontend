@@ -9,7 +9,6 @@ export const queryGenerator = query => {
 
 export const postFetch = (url = '', headers = {}, body = {}) => {
   const postCallBody = JSON.stringify(body);
-
   const post = async () => {
     try {
       const postCall = await fetch(url, {
@@ -19,11 +18,10 @@ export const postFetch = (url = '', headers = {}, body = {}) => {
       });
       const postRes = await postCall.json();
 
-      const ok = 'Ok!';
-
-      return ok;
+      return postRes.message;
     } catch (e) {
-      return '';
+      const result = e;
+      return result;
     }
   };
   if (post() === 'SUCCESS') {

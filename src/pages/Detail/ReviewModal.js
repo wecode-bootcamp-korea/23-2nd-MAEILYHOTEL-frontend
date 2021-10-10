@@ -18,7 +18,7 @@ export const ReviewModal = ({
 }) => {
   const match = useRouteMatch();
   const [hotelReview, loading] = useFetch(
-    `http://10.58.2.242:8000/stays/${match.params.id}/reviews`
+    `${DETAIL_PAGE}/stays/${match.params.id}/reviews`
   );
 
   const headers = {

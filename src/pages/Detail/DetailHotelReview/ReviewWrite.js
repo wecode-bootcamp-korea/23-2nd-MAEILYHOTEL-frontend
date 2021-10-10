@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useRouteMatch, useHistory, useLocation } from 'react-router-dom';
 
+import { DETAIL_PAGE } from '../../../config';
+
 import styled from 'styled-components';
 
 export const ReviewWrite = ({
@@ -41,7 +43,7 @@ export const ReviewWrite = ({
     formData.append('comment', reviewText);
     formData.append('image', imgFile);
 
-    fetch(`http://10.58.2.242:8000/stays/${match.params.id}/reviews`, {
+    fetch(`${DETAIL_PAGE}/stays/${match.params.id}/reviews`, {
       method: 'POST',
       headers: {
         Authorization: localStorage.getItem('login_token'),

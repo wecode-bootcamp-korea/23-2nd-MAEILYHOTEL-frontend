@@ -1,42 +1,35 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 
 import styled from 'styled-components';
+import { flexSet } from '../../styles/Mixins';
 import { theme } from '../../styles/theme';
 
-export const ReservationList = ({ image, name, price, id, key }) => {
-  const history = useHistory();
-  function handleClick() {
-    history.push(`/detail/${id}`);
-  }
-
+export const ReservationList = ({ stay_name, stay_img, status, room_name }) => {
   return (
-    <Hotel onClick={handleClick}>
-      <Search>
-        <img alt="rose" src={image} />
-      </Search>
+    <Hotel>
+      <HotelImg>
+        <img alt="rose" src={stay_img} />
+      </HotelImg>
       <Info>
-        <Name>{name}</Name>
-        <Price>
-          <span>74%</span>
-          <span>{price}</span>
-          <span>27500원</span>
-        </Price>
+        <Name>{stay_name}</Name>
+        <Status>
+          <span>{status}</span>
+          <span>{room_name}</span>
+          {/* <span>27500원</span> */}
+        </Status>
       </Info>
     </Hotel>
   );
 };
 
-const { gray_3 } = theme.colors;
-
 const Hotel = styled.ul`
+  display: flex;
   background-color: white;
   border-top: 18px solid #f8f8f9;
-  cursor: pointer;
 `;
 
-const Search = styled.div`
-  width: 1180px;
+const HotelImg = styled.div`
+  width: 750px;
   position: relative;
 
   img {
@@ -55,27 +48,24 @@ const Search = styled.div`
 `;
 
 const Info = styled.div`
-  padding: 14px 15px;
-  border-bottom: 1px solid lightgray;
+  ${flexSet('space-between', 'inherit', 'column')}
+  padding: 40px 0 30px 25px;
 `;
 
 const Name = styled.div`
-  font-size: 15px;
+  font-size: 30px;
   margin-bottom: 6px;
 `;
 
-const Price = styled.div`
-  span:nth-child(1) {
+const Status = styled.div`
+  span:first-child {
     font-size: 18px;
     color: red;
+    margin-right: 15px;
   }
-  span:nth-child(2) {
+  span:last-child {
     color: black;
     font-size: 18px;
-  }
-  span:nth-child(3) {
-    color: ${gray_3};
-    font-size: 13px;
-    text-decoration: line-through;
+    margin-right: 15px;
   }
 `;
