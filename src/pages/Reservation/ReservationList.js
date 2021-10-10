@@ -1,25 +1,22 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { theme } from '../../styles/theme';
 
-export const HotelList = ({ image, name, price, id }) => {
+export const ReservationList = ({ image, name, price, id, key }) => {
   const history = useHistory();
-  const location = useLocation();
-
   function handleClick() {
-    history.push(`/stays/${id}${location.search}`);
+    history.push(`/detail/${id}`);
   }
+
   return (
     <Hotel onClick={handleClick}>
       <Search>
         <img alt="rose" src={image} />
-        <i class="far fa-heart" />
       </Search>
       <Info>
         <Name>{name}</Name>
-        {/* <Summary>{content}</Summary> */}
         <Price>
           <span>74%</span>
           <span>{price}</span>
@@ -63,7 +60,7 @@ const Info = styled.div`
 `;
 
 const Name = styled.div`
-  font-size: 18px;
+  font-size: 15px;
   margin-bottom: 6px;
 `;
 

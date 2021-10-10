@@ -38,7 +38,6 @@ export const List = () => {
         <Content onClick={changeHotelList}>호텔</Content>
         <Content onClick={changeMotelList}>모텔</Content>
       </Filter>
-      {/* <Count>결과 1020건</Count> */}
       {hotels.staylist &&
         hotels.staylist.map(({ id, name, image_url, price, idx }) => {
           return (
