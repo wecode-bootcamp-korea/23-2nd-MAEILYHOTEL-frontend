@@ -17,7 +17,7 @@
 ### 데모 영상(이미지 클릭)
 
 
-_유투브 영상 링크나 캡쳐 이미지 넣어주세요._
+
 <br>
 https://www.youtube.com/watch?v=qDQXFb2oayE
 
